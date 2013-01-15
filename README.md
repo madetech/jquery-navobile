@@ -1,5 +1,10 @@
 #jQuery navobile
 
+
+##Usage
+
+`$('#foobar').navobile();`
+
 ##Params
 
 There are a few parameters for the plugin, they are mostly optional.
