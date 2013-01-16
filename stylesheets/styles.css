@@ -133,6 +133,7 @@ h2 {
 h3 {
   font-family: 'Ubuntu';
   font-weight: 500;
+  margin: 2em 0 0;
   font-size: 18px;
 }
 
@@ -180,6 +181,31 @@ nav a:focus:before {
 
 .mobile-only {
   display: none;
+}
+
+pre {
+  background: rgba(204,204,204,0.4);
+  border-radius: 5px;
+  color: black;
+  font-family: Monaco, courier, 'courier new', sans-serif;
+  padding: 10px 10px 10px 35px;
+}
+
+pre code {
+  display: block;
+}
+
+.license {
+  background: rgba(204,204,204,0.4);
+  border: 0;
+  border-radius: 5px;
+  font-family: 'Ubuntu';
+  font-weight: 500;
+  height: 200px;
+  margin: 1em 0;
+  overflow: auto;
+  -webkit-overflow-scroll: touch;
+  width: 100%;
 }
 
 footer {
@@ -277,6 +303,9 @@ footer {
   }
 
 
+  .license {
+    height: 300px;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),

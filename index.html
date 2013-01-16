@@ -14,6 +14,7 @@
     <link href='//fonts.googleapis.com/css?family=Lato:300,400,700|Ubuntu:500,700' rel='stylesheet' type='text/css'>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="javascripts/address_bump.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -43,6 +44,40 @@
             </ul>
           </nav>
 
+          <h3>Usage</h3>
+
+          <p>Default usage for Navobile is as easy as this:</p>
+
+          <pre><code>$('#foobar').navobile();</code></pre>
+
+          <p>You will also need to include the css in the src folder.</p>
+
+          <h3>Params</h3>
+
+          <p>Navobile has a few params to customise for you own needs.</p>
+
+          <ul>
+            <li>
+              cta - the element that will open the navigation on click (default: '#show-navigation')
+            </li>
+            <li>
+              content - the selector that wraps the content that will slide out (default: '#content')
+            </li>
+            <li>
+              easing - jQuery easing function to use in $.animate fallback (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
+            </li>
+            <li>
+              changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
+            </li>
+          </ul>
+
+          <p>Any changes to the defaults should be passed in at init</p>
+
+          <pre><code>$('#foobar').navobile({
+    'cta': '#foo-cta',
+    'easing': 'easeQuintOut'
+});</code></pre>
+
           <h3>Dependancies</h3>
           <p>
             Navobile has a couple of dependancies to make full use of its features and get the very best performance possible.
@@ -57,6 +92,10 @@
           <p>
             The versions of the above that were used in development are included in the lib folder of the project.
           </p>
+
+          <h3>License</h3>
+
+          <iframe class="license" src="//raw.github.com/madebymade/jquery-navobile/master/license.txt"></iframe>
 
         </section>
 
