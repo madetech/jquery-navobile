@@ -41,11 +41,15 @@
           swipe: false,
           drag: false
         });
-        base.bindTap(base.$cta, base.$nav, base.$content);
-        base.bindDrag(base.$nav, base.$content);
-        return base.bindSwipe(base.$nav, base.$content);
+        if (typeof Hammer === 'function') {
+          base.bindTap(base.$cta, base.$nav, base.$content, 'tap');
+          base.bindDrag(base.$nav, base.$content);
+          return base.bindSwipe(base.$nav, base.$content);
+        } else {
+          return base.bindTap(base.$cta, base.$nav, base.$content, 'click');
+        }
       };
-      base.bindTap = function($cta, $nav, $content) {
+      base.bindTap = function($cta, $nav, $content, type) {
         return $cta.on('tap', function(e) {
           if (!base.isMobile()) {
             return false;

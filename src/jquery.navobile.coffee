@@ -40,16 +40,19 @@
           swipe: false,
           drag: false
 
-      base.bindTap base.$cta, base.$nav, base.$content
-      base.bindDrag base.$nav, base.$content
-      base.bindSwipe base.$nav, base.$content
+      if typeof Hammer is 'function'
+        base.bindTap base.$cta, base.$nav, base.$content, 'tap'
+        base.bindDrag base.$nav, base.$content
+        base.bindSwipe base.$nav, base.$content
+      else
+        base.bindTap base.$cta, base.$nav, base.$content, 'click'
 
     ################################################
     # Touch Interactions
     ################################################
 
-    base.bindTap = ($cta, $nav, $content) ->
-      $cta.on 'tap', (e) ->
+    base.bindTap = ($cta, $nav, $content, type) ->
+      $cta.on type, (e) ->
         if !base.isMobile()
           return false
 
