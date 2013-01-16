@@ -1,14 +1,14 @@
 #jQuery navobile
 
-##Demo
+###Demo
 
-[View live demo](https://madebymade.github.com/jquery-navobile)
+[View live demo](http://madebymade.github.com/jquery-navobile)
 
-##Usage
+###Usage
 
 `$('#foobar').navobile();`
 
-##Params
+###Params
 
 There are a few parameters for the plugin, they are mostly optional.
 
@@ -17,6 +17,6 @@ There are a few parameters for the plugin, they are mostly optional.
 * easing - jQuery easing function to use in $.animate fallback (default: 'linear') for more easing options you will require [jQuery.easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 * changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
 
-##License
+###License
 
 Licensed under [New BSD License](https://github.com/madebymade/jquery-navobile/blob/master/license.txt)
