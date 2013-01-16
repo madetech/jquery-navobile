@@ -1,5 +1,8 @@
 #jQuery navobile
 
+##Demo
+
+[View live demo](https://madebymade.github.com/jquery-navobile)
 
 ##Usage
 
