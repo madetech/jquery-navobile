@@ -1,6 +1,8 @@
-(($) ->
+((window, $) ->
+  'use strict'
+
   $.navobile = (el, method) ->
-    base = this
+    base = @
     base.$el = $(el)
     base.el = el
     base.$el.data "navobile", base
@@ -13,12 +15,19 @@
           swipe: false,
           drag: false
 
-      base.bindClick base.$cta, base.$nav, base.$content
+      base.bindTap base.$cta, base.$nav, base.$content
       base.bindDrag base.$nav, base.$content
       base.bindSwipe base.$nav, base.$content
 
-    base.bindClick = ($cta, $nav, $content) ->
-      $cta.click (e) ->
+    ################################################
+    # Touch Interactions
+    ################################################
+
+    base.bindTap = ($cta, $nav, $content) ->
+      $cta.on 'tap', (e) ->
+        if !base.isMobile()
+          return false
+
         if $nav.data('open')
           base.slideContentIn $nav, $content
           $nav.data 'open', false
@@ -28,12 +37,10 @@
         e.preventDefault()
 
     base.bindSwipe = ($nav, $content) ->
-      $nav.on 'swipe', (e) ->
-        if e.direction is 'left'
-          base.slideContentIn $nav, $content
-          e.preventDefault()
-
       $content.on 'swipe', (e) ->
+        if !base.isMobile()
+          return false
+
         if $content.data('drag')
           base.removeInlineStyles $nav, $content
           $content.data 'drag', false
@@ -42,12 +49,15 @@
 
         if e.direction is 'right'
           base.slideContentOut $nav, $content
+          return false
         else if e.direction is 'left'
           base.slideContentIn $nav, $content
-        e.preventDefault();
+          return false
 
     base.bindDrag = ($nav, $content) ->
       $content.on 'dragstart drag dragend release', (e) ->
+        if !base.isMobile()
+          return false
 
         if e.type is 'release'
           base.removeInlineStyles $nav, $content
@@ -69,17 +79,19 @@
           if e.type is 'dragstart'
             $content.data 'drag', true
 
-          $nav.css 'opacity', 0
           posX = e.position.x
           translateX = Math.ceil base.calculateTranslate posX
           if translateX > 80 || translateX < 0
             return false
 
-          $nav.css 'opacity', "#{base.draggedNavOpacity translateX}"
           if $('html').hasClass('csstransforms3d')
             $content.css 'transform', "translate3d(#{translateX}%, 0, 0)"
           else if $('html').hasClass('csstransforms')
             $content.css 'transform', "translateX(#{translateX}%)"
+
+    ################################################
+    # Element Movement
+    ################################################
 
     base.animateLeft = (percent, $nav, $content) ->
       if !$('html').hasClass('csstransforms3d') and !$('html').hasClass('csstransforms')
@@ -100,32 +112,44 @@
     base.slideContentOut = ($nav, $content) ->
       base.animateLeft '80%', $nav, $content
 
+    ################################################
+    # Helpers
+    ################################################
+
     base.calculateTranslate = (posX) ->
       (posX / $(document).width()) * 100
 
     base.removeInlineStyles = ($nav, $content) ->
       $content.css 'transform', ''
-      $nav.css 'opacity', ''
 
-    base.draggedNavOpacity = (translateX) ->
-      if translateX > 40 then return 1 else return parseFloat translateX/40
+    base.isMobile = ->
+      $('#navobile-device-pixel').width() > 0
+
+    ################################################
+    # Methods
+    ################################################
 
     methods =
       init: (options) ->
-        base.options = $.extend({}, $.navobile.defaultOptions, options)
+        base.options = $.extend({}, $.navobile.settings, options)
         base.$cta = $(base.options.cta)
         base.$content = $(base.options.content)
         base.$nav = if base.options.changeDOM then base.$el.clone() else base.$el
-
         base.$content.addClass 'navobile-content'
 
+        if $('#navobile-device-pixel').length is 0
+          $('body').append '<div id="navobile-device-pixel" />'
+
+        $('html').addClass 'navobile-bound'
+
         if base.options.changeDOM
-          base.$el.addClass 'desktop-only'
-          base.$nav.addClass 'mobile-only'
+          base.$el.addClass 'navobile-desktop-only'
+          base.$nav.addClass 'navobile-mobile-only'
+          originalId = base.$nav.attr 'id'
+          base.$nav.attr 'id', "navobile-#{ originalId }"
           base.$content.before base.$nav
 
         base.$nav.addClass 'navobile-navigation'
-
         base.attach()
 
       # method: ->
@@ -138,16 +162,14 @@
     else
       return $.error "Method #{ method } does not exist on jQuery.navobile"
 
-  $.navobile.defaultOptions =
+  $.navobile.settings =
     cta: '#show-navigation'
     content: '#content'
     easing: 'linear'
     changeDOM: false
-    accordians: false
-    accordianCta: false
 
   $.fn.navobile = (method) ->
     @each ->
-      new $.navobile(this, method)
+      new $.navobile(@, method)
 
-) jQuery
+) window, jQuery
