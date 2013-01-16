@@ -1,73 +1,93 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>jQuery Navobile by madebymade</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
+    <title>jQuery Navobile by Made by Made</title>
+
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/navobile.css">
+    <link href='//fonts.googleapis.com/css?family=Lato:300,400,700|Ubuntu:500,700' rel='stylesheet' type='text/css'>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+    <script src="//raw.github.com/madebymade/jquery-navobile/master/lib/modernizer.min.js"></script>
+    <script src="//raw.github.com/madebymade/jquery-navobile/master/lib/hammer.min.js"></script>
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/madebymade/jquery-navobile">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/madebymade/jquery-navobile/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/madebymade/jquery-navobile/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+      <div id="content">
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>jQuery Navobile</h1>
-          <p>a jQuery plugin that makes mobile navigation easy</p>
+        <div class="mobile-header-bar">
+          <a href="#" id="show-navobile" class="icon">=</a>
         </div>
 
-        <h3>Dependancies</h3>
+        <section class="container">
 
-        <p>
-          Navobile has a couple of dependancies to make full use of its features. They versions that were used in development are included in the lib folder of the project.
-        </p>
-        <p>
-          These dependancies are:
-        </p>
-        <ul>
-          <li><a href="https://github.com/Modernizr/Modernizr" target="_blank">Modernizer</a></li>
-          <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS (and specailevents bridge for jQuery)</a></li>
-        </ul>
+          <h1>jQuery Navobile</h1>
+          <p>a jQuery plugin that makes mobile navigation easy</p>
 
-      </section>
+          <nav id="navigation">
+            <ul class="cf">
+              <li><a href="https://github.com/madebymade/jquery-navobile" data-icon="g">View On GitHub</a></li>
+              <li><a href="https://github.com/madebymade/jquery-navobile/zipball/master" data-icon="d">Download Zip</a></li>
+              <li><a href="https://github.com/madebymade/jquery-navobile/tarball/master" data-icon="d">Download TAR</a></li>
+              <li><a href="http://madebymade.co.uk" data-icon="w">Visit Made</a></li>
+            </ul>
+          </nav>
 
-      <footer>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/madebymade">madebymade</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-      </footer>
+          <h3>Dependancies</h3>
+          <p>
+            Navobile has a couple of dependancies to make full use of its features and get the very best performance possible.
+          </p>
+          <p>
+            These dependancies are:
+          </p>
+          <ul>
+            <li><a href="https://github.com/Modernizr/Modernizr" target="_blank">Modernizer</a></li>
+            <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS (and specialevents plugin for jQuery)</a></li>
+          </ul>
+          <p>
+            The versions of the above that were used in development are included in the lib folder of the project.
+          </p>
 
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-8205178-3");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+        </section>
+
+        <footer class="container">
+            <address><a href="http://madebymade.co.uk" rel="author">made by Made</a></address>
+        </footer>
+
+      </div>
+
+      <script src="https://raw.github.com/madebymade/jquery-navobile/master/lib/jquery.specialevent.hammer.min.js"></script>
+      <script src="https://raw.github.com/madebymade/jquery-navobile/master/src/jquery.navobile.min.js"></script>
+
+      <script>
+      $(function() {
+          $("#navigation").navobile({
+              cta: "#show-navobile",
+              changeDOM: true,
+              accordians: true
+          });
+      });
+      </script>
+      <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+        try {
+          var pageTracker = _gat._getTracker("UA-8205178-3");
+          pageTracker._trackPageview();
+        } catch(err) {}
+      </script>
 
   </body>
 </html>
