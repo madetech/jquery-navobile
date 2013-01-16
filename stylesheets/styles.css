@@ -205,7 +205,12 @@ pre code {
   margin: 1em 0;
   overflow: auto;
   -webkit-overflow-scroll: touch;
-  width: 100%;
+  padding: 10px;
+}
+
+.license p,
+.license li {
+  font-weight: 500;
 }
 
 footer {
