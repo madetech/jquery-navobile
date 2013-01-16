@@ -262,6 +262,7 @@ footer {
     color: #ddd;
     display: block;
     padding: 14px 15px;
+    text-shadow: 0 -1px rgb(34, 34, 34);
   }
 
   nav a:hover,
@@ -270,6 +271,7 @@ footer {
   }
 
   #navobile-navigation a:before {
+    text-shadow: 0 -1px rgb(34, 34, 34);
     color: #ddd;
     margin-right: 10px;
   }
