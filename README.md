@@ -8,6 +8,8 @@
 
 `$('#foobar').navobile();`
 
+The css required for the plugin is [here](https://raw.github.com/madebymade/jquery-navobile/master/src/jquery.navobile.css) because its always better to control styling in CSS where possible.
+
 ###Params
 
 There are a few parameters for the plugin, they are mostly optional.
