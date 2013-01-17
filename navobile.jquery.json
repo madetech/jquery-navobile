@@ -1,0 +1,39 @@
+{
+  "name": "navobile",
+    "title": "jQuery Navobile",
+    "description": "A jQuery plugin that makes mobile navigation easy.",
+    "keywords": [
+      "responsive",
+      "mobile",
+      "navigation",
+      "menu",
+      "touch"
+    ],
+    "version": "0.1",
+    "author": {
+      "name": "Made by Made and other contributors",
+      "url": "https://github.com/madebymade/jquery-navobile/blob/master/AUTHORS.txt"
+    },
+    "maintainers": [
+    {
+      "name": "Seb Ashton",
+      "email": "seb+navobile@madebymade.co.uk",
+      "url": "http://www.madebymade.co.uk"
+    }
+  ],
+    "licenses": [
+    {
+      "type": "New BSD",
+      "url": "https://github.com/madebymade/jquery-navobile/blob/master/BSD-LICENSE.txt"
+    }
+  ],
+    "bugs": "https://github.com/madebymade/jquery-navobile/issues",
+    "homepage": "http://madebymade.github.com/jquery-navobile/",
+    "docs": "http://madebymade.github.com/jquery-navobile/",
+    "download": "https://github.com/madebymade/jquery-navobile/zipball/master",
+    "dependencies": {
+      "jquery": ">=1.8",
+      "hammer": "0.6.1",
+      "modernizr": ">=2.6"
+    }
+}
