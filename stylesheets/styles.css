@@ -127,14 +127,21 @@ h1 {
 h2 {
   font-family: 'Ubuntu';
   font-weight: 700;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 h3 {
   font-family: 'Ubuntu';
   font-weight: 500;
   margin: 2em 0 0;
-  font-size: 18px;
+  font-size: 20px;
+}
+
+h4 {
+  font-family: 'Ubuntu';
+  font-weight: 500;
+  margin: 1em 0;
+  font-size: 16px;
 }
 
 p {

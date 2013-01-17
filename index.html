@@ -47,11 +47,17 @@
 
           <h3>Usage</h3>
 
+          <h4>JavaScript</h4>
+
           <p>Default usage for Navobile is as easy as this:</p>
 
           <pre><code>$('#foobar').navobile();</code></pre>
 
-          <p>You will also need to include the css in the src folder.</p>
+          <h4>CSS</h4>
+
+          <p>Navobile uses CSS to apply CSS3 translations, Mobile device detection and fixing the position of nav. In the CSS file we used for this demo and the one that is included in the src folder the mobile break point is at 765px using a media query, you can of course change this to suit you need.</p>
+
+          <p>Changing the timing function used by the transform alter Navobile's css. The available timing functions available are listed very well on <a href="https://developer.mozilla.org/en-US/docs/CSS/transition-timing-function" target="_blank">MDN</a>. If you want something really bespoke you could use Lea Vearou's <a href="http://cubic-bezier.com/" target="_blank">Cubic bezier</a> tool</p>
 
           <h3>Params</h3>
 
@@ -65,7 +71,7 @@
               content - the selector that wraps the content that will slide out (default: '#content')
             </li>
             <li>
-              easing - jQuery easing function to use in $.animate fallback (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
+              easing - jQuery easing for the fallback $.animate function (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
             </li>
             <li>
               changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
