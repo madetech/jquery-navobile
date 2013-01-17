@@ -1,7 +1,7 @@
 {
   "name": "navobile",
     "title": "jQuery Navobile",
-    "description": "A jQuery plugin that makes mobile navigation easy.",
+    "description": "A jQuery plugin that makes mobile navigation easy. To make full use of its features you will need Hammer JS and Modernizr but it will fallback to using $.animate. For a demo of the plugin in action head to the homepage/docs and resize your browser window.",
     "keywords": [
       "responsive",
       "mobile",
@@ -9,7 +9,7 @@
       "menu",
       "touch"
     ],
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
       "name": "Made by Made",
       "url": "https://github.com/madebymade/jquery-navobile/blob/master/AUTHORS.txt"
