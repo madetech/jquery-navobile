@@ -66,6 +66,10 @@
 
     base.bindSwipe = ($nav, $content) ->
       $content.on 'swipe', (e) ->
+
+        if e.direction is 'up' or e.direction  is 'down'
+          return true
+
         if !base.isMobile()
           return false
 
@@ -89,6 +93,7 @@
 
         if e.type is 'release'
           base.removeInlineStyles $nav, $content
+          return false
 
         if e.direction is 'left'
           if !$content.hasClass('navobile-content-hidden')
@@ -98,10 +103,14 @@
 
         if e.direction is 'right'
           if e.type is 'dragend'
+
             if e.distance > 60
               base.slideContentOut $nav, $content
             else
               base.slideContentIn $nav, $content
+
+            base.removeInlineStyles $nav, $content
+
             return false
 
           if e.type is 'dragstart'

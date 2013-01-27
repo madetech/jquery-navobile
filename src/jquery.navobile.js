@@ -50,7 +50,7 @@
         }
       };
       base.bindTap = function($cta, $nav, $content, type) {
-        return $cta.on('tap', function(e) {
+        return $cta.on(type, function(e) {
           if (!base.isMobile()) {
             return false;
           }
@@ -66,6 +66,9 @@
       };
       base.bindSwipe = function($nav, $content) {
         return $content.on('swipe', function(e) {
+          if (e.direction === 'up' || e.direction === 'down') {
+            return true;
+          }
           if (!base.isMobile()) {
             return false;
           }
@@ -91,6 +94,7 @@
           }
           if (e.type === 'release') {
             base.removeInlineStyles($nav, $content);
+            return false;
           }
           if (e.direction === 'left') {
             if (!$content.hasClass('navobile-content-hidden')) {
@@ -106,6 +110,7 @@
               } else {
                 base.slideContentIn($nav, $content);
               }
+              base.removeInlineStyles($nav, $content);
               return false;
             }
             if (e.type === 'dragstart') {
