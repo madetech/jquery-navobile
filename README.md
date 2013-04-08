@@ -4,7 +4,7 @@ For full documentation please see the demo page.
 
 ###Demo
 
-[View live demo](http://madebymade.github.com/jquery-navobile)
+[View live demo](http://madebymade.github.io/jquery-navobile)
 
 ###Usage
 

@@ -29,8 +29,8 @@
     }
   ],
     "bugs": "https://github.com/madebymade/jquery-navobile/issues",
-    "homepage": "http://madebymade.github.com/jquery-navobile/",
-    "docs": "http://madebymade.github.com/jquery-navobile/",
+    "homepage": "http://madebymade.github.io/jquery-navobile/",
+    "docs": "http://madebymade.github.io/jquery-navobile/",
     "download": "https://github.com/madebymade/jquery-navobile/zipball/master",
     "dependencies": {
       "jquery": ">=1.8",
