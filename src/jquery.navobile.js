@@ -43,7 +43,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       });
       if (typeof Hammer === 'function') {
         base.bindTap(base.$cta, base.$nav, base.$content, 'tap');
-        base.bindDrag(base.$nav, base.$content);
         base.bindSwipe(base.$nav, base.$content);
         return base.preventCtaClick();
       } else {
@@ -52,6 +51,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     };
     base.bindTap = function($cta, $nav, $content, type) {
       return $cta.on(type, function(e) {
+        e.stopPropagation();
+        e.cancelBubble = true;
         e.preventDefault();
         if (!base.isMobile()) {
           return false;
@@ -172,6 +173,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     methods = {
       init: function(options) {
         var originalId;
+        if ($('body').hasClass('navobile-bound')) {
+          return;
+        }
         base.options = $.extend({}, $.navobile.settings, options);
         base.$cta = $(base.options.cta);
         base.$content = $(base.options.content);
@@ -180,7 +184,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if ($('#navobile-device-pixel').length === 0) {
           $('body').append('<div id="navobile-device-pixel" />');
         }
-        $('html').addClass('navobile-bound');
+        $('body').addClass('navobile-bound');
         if (base.options.changeDOM) {
           base.$el.addClass('navobile-desktop-only');
           base.$nav.addClass('navobile-mobile-only');

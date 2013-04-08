@@ -36,15 +36,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.attach = ->
       base.$el.data
-          open: false
+        open: false
 
       base.$content.data
-          swipe: false,
-          drag: false
+        swipe: false,
+        drag: false
 
       if typeof Hammer is 'function'
         base.bindTap base.$cta, base.$nav, base.$content, 'tap'
-        base.bindDrag base.$nav, base.$content
         base.bindSwipe base.$nav, base.$content
         base.preventCtaClick()
       else
@@ -56,10 +55,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.bindTap = ($cta, $nav, $content, type) ->
       $cta.on type, (e) ->
+        e.stopPropagation()
+        e.cancelBubble = true
         e.preventDefault()
 
-        if !base.isMobile()
-          return false
+        return false if !base.isMobile()
 
         if $nav.data('open')
           base.slideContentIn $nav, $content
@@ -71,8 +71,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if e.direction is 'up' or e.direction  is 'down'
           return true
 
-        if !base.isMobile()
-          return false
+        return false if !base.isMobile()
 
         if $content.data('drag')
           base.removeInlineStyles $nav, $content
@@ -89,8 +88,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.bindDrag = ($nav, $content) ->
       $content.on 'dragstart drag dragend release', (e) ->
-        if !base.isMobile()
-          return false
+        return false if !base.isMobile()
 
         if e.type is 'release'
           base.removeInlineStyles $nav, $content
@@ -175,6 +173,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     methods =
       init: (options) ->
+        return if $('body').hasClass 'navobile-bound'
+
         base.options = $.extend({}, $.navobile.settings, options)
         base.$cta = $(base.options.cta)
         base.$content = $(base.options.content)
@@ -184,7 +184,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if $('#navobile-device-pixel').length is 0
           $('body').append '<div id="navobile-device-pixel" />'
 
-        $('html').addClass 'navobile-bound'
+        $('body').addClass 'navobile-bound'
 
         if base.options.changeDOM
           base.$el.addClass 'navobile-desktop-only'
@@ -195,9 +195,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         base.$nav.addClass 'navobile-navigation'
         base.attach()
-
-      # method: ->
-      #   do method
 
     if methods[method]
       return methods[method].apply this, Array::slice.call(argument, 1)
