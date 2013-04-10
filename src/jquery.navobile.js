@@ -25,194 +25,206 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-(function(window, $) {
-  'use strict';
-  $.navobile = function(el, method) {
-    var base, methods;
-    base = this;
-    base.$el = $(el);
-    base.el = el;
-    base.$el.data("navobile", base);
-    base.attach = function() {
-      base.$el.data({
-        open: false
-      });
-      base.$content.data({
-        swipe: false,
-        drag: false
-      });
-      if (typeof Hammer === 'function') {
-        base.bindTap(base.$cta, base.$nav, base.$content, 'tap');
-        base.bindSwipe(base.$nav, base.$content);
-        return base.preventCtaClick();
-      } else {
-        return base.bindTap(base.$cta, base.$nav, base.$content, 'click');
-      }
-    };
-    base.bindTap = function($cta, $nav, $content, type) {
-      return $cta.on(type, function(e) {
-        e.stopPropagation();
-        e.cancelBubble = true;
-        e.preventDefault();
-        if (!base.isMobile()) {
-          return false;
-        }
-        if ($nav.data('open')) {
-          return base.slideContentIn($nav, $content);
-        } else {
-          return base.slideContentOut($nav, $content);
-        }
-      });
-    };
-    base.bindSwipe = function($nav, $content) {
-      return $content.on('swipe', function(e) {
-        if (e.direction === 'up' || e.direction === 'down') {
-          return true;
-        }
-        if (!base.isMobile()) {
-          return false;
-        }
-        if ($content.data('drag')) {
-          base.removeInlineStyles($nav, $content);
-          $content.data('drag', false);
-        }
-        $content.data('swipe', true);
-        if (e.direction === 'right') {
-          base.slideContentOut($nav, $content);
-          return false;
-        } else if (e.direction === 'left') {
-          base.slideContentIn($nav, $content);
-          return false;
-        }
-      });
-    };
-    base.bindDrag = function($nav, $content) {
-      return $content.on('dragstart drag dragend release', function(e) {
-        var posX, translateX;
-        if (!base.isMobile()) {
-          return false;
-        }
-        if (e.type === 'release') {
-          base.removeInlineStyles($nav, $content);
-          return false;
-        }
-        if (e.direction === 'left') {
-          if (!$content.hasClass('navobile-content-hidden')) {
-            return false;
-          } else {
-            base.slideContentIn($nav, $content);
+
+(function() {
+
+  (function(window, $) {
+    'use strict';
+    $.navobile = function(el, method) {
+      var base, methods;
+      base = this;
+      base.$el = $(el);
+      base.el = el;
+      base.$el.data("navobile", base);
+      base.attach = function() {
+        base.$el.data({
+          open: false
+        });
+        base.$content.data({
+          swipe: false,
+          drag: false
+        });
+        if (typeof Hammer === 'function') {
+          base.bindTap(base.$cta, base.$nav, base.$content, 'tap');
+          if (base.options.bindSwipe) {
+            base.bindSwipe(base.$nav, base.$content);
           }
+          if (base.options.bindDrag) {
+            base.bindDrag(base.$nav, base.$content);
+          }
+          return base.preventCtaClick();
+        } else {
+          return base.bindTap(base.$cta, base.$nav, base.$content, 'click');
         }
-        if (e.direction === 'right') {
-          if (e.type === 'dragend') {
-            if (e.distance > 60) {
-              base.slideContentOut($nav, $content);
-            } else {
-              base.slideContentIn($nav, $content);
-            }
+      };
+      base.bindTap = function($cta, $nav, $content, type) {
+        return $cta.on(type, function(e) {
+          e.stopPropagation();
+          e.cancelBubble = true;
+          e.preventDefault();
+          if (!base.isMobile()) {
+            return false;
+          }
+          if ($nav.data('open')) {
+            return base.slideContentIn($nav, $content);
+          } else {
+            return base.slideContentOut($nav, $content);
+          }
+        });
+      };
+      base.bindSwipe = function($nav, $content) {
+        return $content.on('swipe', function(e) {
+          if (e.direction === 'up' || e.direction === 'down') {
+            return true;
+          }
+          if (!base.isMobile()) {
+            return false;
+          }
+          if ($content.data('drag')) {
+            base.removeInlineStyles($nav, $content);
+            $content.data('drag', false);
+          }
+          $content.data('swipe', true);
+          if (e.direction === 'right') {
+            base.slideContentOut($nav, $content);
+            return false;
+          } else if (e.direction === 'left') {
+            base.slideContentIn($nav, $content);
+            return false;
+          }
+        });
+      };
+      base.bindDrag = function($nav, $content) {
+        return $content.on('dragstart drag dragend release', function(e) {
+          var posX, translateX;
+          if (!base.isMobile()) {
+            return false;
+          }
+          if (e.type === 'release') {
             base.removeInlineStyles($nav, $content);
             return false;
           }
-          if (e.type === 'dragstart') {
-            $content.data('drag', true);
+          if (e.direction === 'left') {
+            if (!$content.hasClass('navobile-content-hidden')) {
+              return false;
+            } else {
+              base.slideContentIn($nav, $content);
+            }
           }
-          posX = e.position.x;
-          translateX = Math.ceil(base.calculateTranslate(posX));
-          if (translateX > 80 || translateX < 0) {
-            return false;
+          if (e.direction === 'right') {
+            if (e.type === 'dragend') {
+              if (e.distance > 60) {
+                base.slideContentOut($nav, $content);
+              } else {
+                base.slideContentIn($nav, $content);
+              }
+              base.removeInlineStyles($nav, $content);
+              return false;
+            }
+            if (e.type === 'dragstart') {
+              $content.data('drag', true);
+            }
+            posX = e.position.x;
+            translateX = Math.ceil(base.calculateTranslate(posX));
+            if (translateX > 80 || translateX < 0) {
+              return false;
+            }
+            if ($('html').hasClass('csstransforms3d')) {
+              return $content.css('transform', "translate3d(" + translateX + "%, 0, 0)");
+            } else if ($('html').hasClass('csstransforms')) {
+              return $content.css('transform', "translateX(" + translateX + "%)");
+            }
           }
-          if ($('html').hasClass('csstransforms3d')) {
-            return $content.css('transform', "translate3d(" + translateX + "%, 0, 0)");
-          } else if ($('html').hasClass('csstransforms')) {
-            return $content.css('transform', "translateX(" + translateX + "%)");
-          }
-        }
-      });
-    };
-    base.animateLeft = function(percent, $nav, $content) {
-      if (!$('html').hasClass('csstransforms3d') && !$('html').hasClass('csstransforms')) {
-        $content.animate({
-          left: percent
-        }, 200, 'linear');
-      } else {
-        if (percent === '0%') {
-          $content.removeClass('navobile-content-hidden');
+        });
+      };
+      base.animateLeft = function(percent, $nav, $content) {
+        if (!$('html').hasClass('csstransforms3d') && !$('html').hasClass('csstransforms')) {
+          $content.animate({
+            left: percent
+          }, 200, 'linear');
         } else {
-          $content.addClass('navobile-content-hidden');
+          if (percent === '0%') {
+            $content.removeClass('navobile-content-hidden');
+          } else {
+            $content.addClass('navobile-content-hidden');
+          }
         }
-      }
-      if (percent === '0%') {
-        $nav.removeClass('navobile-navigation-visible');
+        if (percent === '0%') {
+          $nav.removeClass('navobile-navigation-visible');
+        } else {
+          $nav.addClass('navobile-navigation-visible');
+        }
+        return base.removeInlineStyles($nav, $content);
+      };
+      base.slideContentIn = function($nav, $content) {
+        $nav.data('open', false);
+        return base.animateLeft('0%', $nav, $content);
+      };
+      base.slideContentOut = function($nav, $content) {
+        $nav.data('open', true);
+        return base.animateLeft('80%', $nav, $content);
+      };
+      base.calculateTranslate = function(posX) {
+        return (posX / $(document).width()) * 100;
+      };
+      base.removeInlineStyles = function($nav, $content) {
+        return $content.css('transform', '');
+      };
+      base.isMobile = function() {
+        return $('#navobile-device-pixel').width() > 0;
+      };
+      base.preventCtaClick = function() {
+        return $(base.$cta).click(function(e) {
+          return e.preventDefault();
+        });
+      };
+      methods = {
+        init: function(options) {
+          var originalId;
+          if ($('body').hasClass('navobile-bound')) {
+            return;
+          }
+          base.options = $.extend({}, $.navobile.settings, options);
+          base.$cta = $(base.options.cta);
+          base.$content = $(base.options.content);
+          base.$nav = base.options.changeDOM ? base.$el.clone() : base.$el;
+          base.$content.addClass('navobile-content');
+          if ($('#navobile-device-pixel').length === 0) {
+            $('body').append('<div id="navobile-device-pixel" />');
+          }
+          $('body').addClass('navobile-bound');
+          if (base.options.changeDOM) {
+            base.$el.addClass('navobile-desktop-only');
+            base.$nav.addClass('navobile-mobile-only');
+            originalId = base.$nav.attr('id');
+            base.$nav.attr('id', "navobile-" + originalId);
+            base.$content.before(base.$nav);
+          }
+          base.$nav.addClass('navobile-navigation');
+          return base.attach();
+        }
+      };
+      if (methods[method]) {
+        return methods[method].apply(this, Array.prototype.slice.call(argument, 1));
+      } else if (typeof method === "object" || !method) {
+        return methods.init(method);
       } else {
-        $nav.addClass('navobile-navigation-visible');
+        return $.error("Method " + method + " does not exist on jQuery.navobile");
       }
-      return base.removeInlineStyles($nav, $content);
     };
-    base.slideContentIn = function($nav, $content) {
-      $nav.data('open', false);
-      return base.animateLeft('0%', $nav, $content);
+    $.navobile.settings = {
+      cta: '#show-navigation',
+      content: '#content',
+      easing: 'linear',
+      changeDOM: false,
+      bindSwipe: false,
+      bindDrag: false
     };
-    base.slideContentOut = function($nav, $content) {
-      $nav.data('open', true);
-      return base.animateLeft('80%', $nav, $content);
-    };
-    base.calculateTranslate = function(posX) {
-      return (posX / $(document).width()) * 100;
-    };
-    base.removeInlineStyles = function($nav, $content) {
-      return $content.css('transform', '');
-    };
-    base.isMobile = function() {
-      return $('#navobile-device-pixel').width() > 0;
-    };
-    base.preventCtaClick = function() {
-      return $(base.$cta).click(function(e) {
-        return e.preventDefault();
+    return $.fn.navobile = function(method) {
+      return this.each(function() {
+        return new $.navobile(this, method);
       });
     };
-    methods = {
-      init: function(options) {
-        var originalId;
-        if ($('body').hasClass('navobile-bound')) {
-          return;
-        }
-        base.options = $.extend({}, $.navobile.settings, options);
-        base.$cta = $(base.options.cta);
-        base.$content = $(base.options.content);
-        base.$nav = base.options.changeDOM ? base.$el.clone() : base.$el;
-        base.$content.addClass('navobile-content');
-        if ($('#navobile-device-pixel').length === 0) {
-          $('body').append('<div id="navobile-device-pixel" />');
-        }
-        $('body').addClass('navobile-bound');
-        if (base.options.changeDOM) {
-          base.$el.addClass('navobile-desktop-only');
-          base.$nav.addClass('navobile-mobile-only');
-          originalId = base.$nav.attr('id');
-          base.$nav.attr('id', "navobile-" + originalId);
-          base.$content.before(base.$nav);
-        }
-        base.$nav.addClass('navobile-navigation');
-        return base.attach();
-      }
-    };
-    if (methods[method]) {
-      return methods[method].apply(this, Array.prototype.slice.call(argument, 1));
-    } else if (typeof method === "object" || !method) {
-      return methods.init(method);
-    } else {
-      return $.error("Method " + method + " does not exist on jQuery.navobile");
-    }
-  };
-  $.navobile.settings = {
-    cta: '#show-navigation',
-    content: '#content',
-    easing: 'linear',
-    changeDOM: false
-  };
-  return $.fn.navobile = function(method) {
-    return this.each(function() {
-      return new $.navobile(this, method);
-    });
-  };
-})(window, jQuery);
+  })(window, jQuery);
+
+}).call(this);

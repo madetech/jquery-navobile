@@ -44,7 +44,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
       if typeof Hammer is 'function'
         base.bindTap base.$cta, base.$nav, base.$content, 'tap'
-        base.bindSwipe base.$nav, base.$content
+
+        if base.options.bindSwipe
+          base.bindSwipe base.$nav, base.$content
+
+        if base.options.bindDrag
+          base.bindDrag base.$nav, base.$content
+
         base.preventCtaClick()
       else
         base.bindTap base.$cta, base.$nav, base.$content, 'click'
@@ -208,6 +214,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     content: '#content'
     easing: 'linear'
     changeDOM: false
+    bindSwipe: false
+    bindDrag: false
 
   $.fn.navobile = (method) ->
     @each ->
