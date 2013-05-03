@@ -9,8 +9,8 @@
 
 @media screen and (min-width: 0px) and (max-width: 765px) {
 
-    .navobile-bound,
-    .navobile-bound body {
+    html,
+    .navobile-bound {
       overflow-x: hidden;
       width: 100%;
     }
