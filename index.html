@@ -36,14 +36,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <script src="//raw.github.com/madebymade/jquery-navobile/master/lib/modernizer.min.js"></script>
-    <script src="//raw.github.com/madebymade/jquery-navobile/master/lib/hammer.min.js"></script>
+
+    <script src="//raw.github.com/EightMedia/hammer.js/v1.0.5/dist/hammer.min.js"></script>
+    <script src="//raw.github.com/EightMedia/hammer.js/v1.0.5/plugins/jquery.hammer.js"></script>
 
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </head>
   <body>
       <div id="content">
 
-        <div class="mobile-header-bar mobile-only">
+        <div class="mobile-header-bar mobile-only" style="position:relative;">
           <a href="#" id="show-navobile" class="icon">=</a>
         </div>
 
@@ -95,10 +97,10 @@
               changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
             </li>
             <li>
-              bindSwipe - Boolean, whether to open/close nav using swipe. Experimental feature. default: false
+              bindSwipe - Boolean, whether to open/close nav using swipe. HammerJS required for this to work. default: false
             </li>
             <li>
-              bindDrag - Boolean, whether to open/close nav using drag. Experimental feature. default: false
+              bindDrag - Boolean, whether to open/close nav using drag. HammerJS required for this to work. Experimental feature. default: false
             </li>
           </ul>
 
@@ -113,16 +115,38 @@
           <p>
             Navobile has a couple of dependencies to make full use of its features and get the very best performance possible.
           </p>
+
           <p>
             These dependencies are:
           </p>
+
           <ul>
             <li><a href="https://github.com/Modernizr/Modernizr" target="_blank">Modernizer</a></li>
-            <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS (and specialevents plugin for jQuery)</a></li>
+            <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS and its plugin for jQuery</a></li>
           </ul>
+
           <p>
-            The versions of the above that were used in development are included in the lib folder of the project. <b>It is strongly advised</b> that you use the version on HammerJS included in the source of this project as it contains a fix for the tap event firing twice <a href="https://github.com/EightMedia/hammer.js/issues/106" target="_blank">Issue #106</a> within v1 of HammerJS.
+            HammerJS is only required for the swipe and experimental drag features.
           </p>
+
+          <p>
+            The versions of the above that were used in development are included in the lib folder of the project. Version 0.2 of Navobile was built with v1.0.5 of HammerJS. Earlier versions (versions > v0.2) are recommended to use the version of <a href="https://raw.github.com/madebymade/jquery-navobile/0.1.4/lib/hammer.min.js" target="_blank" title="(Opens in new window)">HammerJS</a> in the v0.1.4 tag as it contains a bug fix.
+          </p>
+
+          <section>
+            <h3>Change Log</h3>
+            <h4>v0.2</h4>
+            <ul>
+              <li>Latest version of HammerJS</li>
+              <li>Removes dependancy on HammerJS for basic functionality</li>
+              <li>Swipe open/close is now stable</li>
+              <li>General housekeeping</li>
+            </ul>
+            <h4>v0.1</h4>
+            <ul>
+              <li>Initial Release</li>
+            </ul>
+          </section>
 
           <h3>License</h3>
 
@@ -168,15 +192,14 @@
 
       </div>
 
-      <script src="https://raw.github.com/madebymade/jquery-navobile/master/lib/jquery.specialevent.hammer.min.js"></script>
-      <script src="https://raw.github.com/madebymade/jquery-navobile/master/src/jquery.navobile.min.js"></script>
+      <script src="//raw.github.com/madebymade/jquery-navobile/master/src/navobile.min.js"></script>
 
       <script>
       $(function() {
           $("#navigation").navobile({
+              bindSwipe: true,
               cta: "#show-navobile",
-              changeDOM: true,
-              accordians: true
+              changeDOM: true
           });
       });
       </script>
