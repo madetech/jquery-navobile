@@ -41,42 +41,40 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           open: false
         });
         base.$content.data({
-          swipe: false,
           drag: false
         });
-        if (typeof Hammer === 'function') {
-          base.bindTap(base.$cta, base.$nav, base.$content, 'tap');
+        base.bindTap(base.$cta, base.$nav, base.$content, ($('html').hasClass('touch') ? 'touchend' : 'click'));
+        if (typeof Hammer === 'function' && (base.options.bindSwipe || base.options.bindDrag)) {
+          base.$content.hammer();
           if (base.options.bindSwipe) {
             base.bindSwipe(base.$nav, base.$content);
           }
           if (base.options.bindDrag) {
-            base.bindDrag(base.$nav, base.$content);
+            return base.bindDrag(base.$nav, base.$content);
           }
-          return base.preventCtaClick();
-        } else {
-          return base.bindTap(base.$cta, base.$nav, base.$content, 'click');
         }
       };
       base.bindTap = function($cta, $nav, $content, type) {
-        return $cta.on(type, function(e) {
-          e.stopPropagation();
-          e.cancelBubble = true;
-          e.preventDefault();
+        return $cta.on(type, function(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          if (ev.gesture !== void 0) {
+            ev.gesture.preventDefault();
+            ev.gesture.stopPropagation();
+          }
           if (!base.isMobile()) {
             return false;
           }
           if ($nav.data('open')) {
-            return base.slideContentIn($nav, $content);
+            base.slideContentIn($nav, $content);
           } else {
-            return base.slideContentOut($nav, $content);
+            base.slideContentOut($nav, $content);
           }
+          return false;
         });
       };
       base.bindSwipe = function($nav, $content) {
-        return $content.on('swipe', function(e) {
-          if (e.direction === 'up' || e.direction === 'down') {
-            return true;
-          }
+        $content.on('swipeleft', function(e) {
           if (!base.isMobile()) {
             return false;
           }
@@ -84,14 +82,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             base.removeInlineStyles($nav, $content);
             $content.data('drag', false);
           }
-          $content.data('swipe', true);
-          if (e.direction === 'right') {
-            base.slideContentOut($nav, $content);
-            return false;
-          } else if (e.direction === 'left') {
-            base.slideContentIn($nav, $content);
+          base.slideContentIn($nav, $content);
+          e.gesture.preventDefault();
+          return e.stopPropagation();
+        });
+        return $content.on('swiperight', function(e) {
+          if (!base.isMobile()) {
             return false;
           }
+          if ($content.data('drag')) {
+            base.removeInlineStyles($nav, $content);
+            $content.data('drag', false);
+          }
+          base.slideContentOut($nav, $content);
+          e.gesture.preventDefault();
+          return e.stopPropagation();
         });
       };
       base.bindDrag = function($nav, $content) {
@@ -141,7 +146,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if (!$('html').hasClass('csstransforms3d') && !$('html').hasClass('csstransforms')) {
           $content.animate({
             left: percent
-          }, 200, 'linear');
+          }, 200, base.options.easing);
         } else {
           if (percent === '0%') {
             $content.removeClass('navobile-content-hidden');
@@ -172,11 +177,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       };
       base.isMobile = function() {
         return $('#navobile-device-pixel').width() > 0;
-      };
-      base.preventCtaClick = function() {
-        return $(base.$cta).click(function(e) {
-          return e.preventDefault();
-        });
       };
       methods = {
         init: function(options) {

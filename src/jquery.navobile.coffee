@@ -39,11 +39,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         open: false
 
       base.$content.data
-        swipe: false,
         drag: false
 
-      if typeof Hammer is 'function'
-        base.bindTap base.$cta, base.$nav, base.$content, 'tap'
+      base.bindTap base.$cta, base.$nav, base.$content, (
+        if $('html').hasClass 'touch' then 'touchend' else 'click'
+      )
+
+      if typeof Hammer is 'function' and (base.options.bindSwipe or base.options.bindDrag)
+        base.$content.hammer()
 
         if base.options.bindSwipe
           base.bindSwipe base.$nav, base.$content
@@ -51,19 +54,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if base.options.bindDrag
           base.bindDrag base.$nav, base.$content
 
-        base.preventCtaClick()
-      else
-        base.bindTap base.$cta, base.$nav, base.$content, 'click'
-
     ################################################
     # Touch Interactions
     ################################################
 
     base.bindTap = ($cta, $nav, $content, type) ->
-      $cta.on type, (e) ->
-        e.stopPropagation()
-        e.cancelBubble = true
-        e.preventDefault()
+      $cta.on type, (ev)->
+        ev.preventDefault()
+        ev.stopPropagation()
 
         return false if !base.isMobile()
 
@@ -72,25 +70,30 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         else
           base.slideContentOut $nav, $content
 
-    base.bindSwipe = ($nav, $content) ->
-      $content.on 'swipe', (e) ->
-        if e.direction is 'up' or e.direction  is 'down'
-          return true
+        return false
 
+    base.bindSwipe = ($nav, $content) ->
+      $content.on 'swipeleft', (e) ->
         return false if !base.isMobile()
 
         if $content.data('drag')
           base.removeInlineStyles $nav, $content
           $content.data 'drag', false
 
-        $content.data 'swipe', true
+        base.slideContentIn $nav, $content
+        e.gesture.preventDefault()
+        e.stopPropagation()
 
-        if e.direction is 'right'
-          base.slideContentOut $nav, $content
-          return false
-        else if e.direction is 'left'
-          base.slideContentIn $nav, $content
-          return false
+      $content.on 'swiperight', (e) ->
+        return false if !base.isMobile()
+
+        if $content.data('drag')
+          base.removeInlineStyles $nav, $content
+          $content.data 'drag', false
+
+        base.slideContentOut $nav, $content
+        e.gesture.preventDefault()
+        e.stopPropagation()
 
     base.bindDrag = ($nav, $content) ->
       $content.on 'dragstart drag dragend release', (e) ->
@@ -140,7 +143,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         $content.animate
             left: percent
         , 200
-        , 'linear'
+        , base.options.easing
       else
         if percent is '0%' then $content.removeClass 'navobile-content-hidden' else $content.addClass 'navobile-content-hidden'
 
@@ -168,10 +171,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.isMobile = ->
       $('#navobile-device-pixel').width() > 0
-
-    base.preventCtaClick = ->
-      $(base.$cta).click (e) ->
-        e.preventDefault()
 
     ################################################
     # Methods
