@@ -1,0 +1,6 @@
+branches:
+  only:
+    - "master"
+
+script:
+  - phantomjs ./test/lib/phantom-jasmine/run\_jasmine\_test.coffee ./test/SpecRunner.html
