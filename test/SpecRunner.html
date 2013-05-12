@@ -12,11 +12,13 @@
 
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.fixture.js"></script>
+  <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.jquery.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
+  <script type="text/javascript" src="lib/phantom-jasmine/console-runner.js"></script>
 
   <script type="text/javascript" src="../lib/modernizer.min.js"></script>
 
-  <script type="text/javascript" src="../src/jquery.navobile.min.js"></script>
+  <script type="text/javascript" src="../src/jquery.navobile.js"></script>
   <script type="text/coffeescript" src="lib/attach-navobile.coffee"></script>
 
   <script type="text/javascript" src="support/navobile.js"></script>
@@ -33,8 +35,10 @@
       jasmineEnv.updateInterval = 1000;
 
       var htmlReporter = new jasmine.HtmlReporter();
+      var consoleReporter = new jasmine.ConsoleReporter();
 
       jasmineEnv.addReporter(htmlReporter);
+      jasmineEnv.addReporter(consoleReporter);
 
       jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
