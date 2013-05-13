@@ -75,7 +75,7 @@
     transform: translate3d(0,0,0);
   }
 
-  .csstransforms #content.navobile-content-hidden {
+  .csstransforms3d #content.navobile-content-hidden {
     -webkit-transform: translate3d(80%,0,0);
     -moz-transform: translate3d(80%,0,0);
     -ms-transform: translate3d(80%,0,0);

@@ -58,10 +58,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return $cta.on(type, function(ev) {
           ev.preventDefault();
           ev.stopPropagation();
-          if (ev.gesture !== void 0) {
-            ev.gesture.preventDefault();
-            ev.gesture.stopPropagation();
-          }
           if (!base.isMobile()) {
             return false;
           }

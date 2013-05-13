@@ -2,5 +2,10 @@ branches:
   only:
     - "master"
 
+before_script:
+  - coffee -c ./test/spec
+  - coffee -c ./test/support
+
 script:
   - phantomjs ./test/lib/phantom-jasmine/run\_jasmine\_test.coffee ./test/SpecRunner.html
+
