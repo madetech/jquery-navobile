@@ -2,6 +2,9 @@ branches:
   only:
     - "master"
 
+before_install:
+  - npm install coffee-script
+
 before_script:
   - coffee -c ./test/spec
   - coffee -c ./test/support
