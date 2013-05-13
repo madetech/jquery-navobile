@@ -2,6 +2,8 @@
 
 For full documentation please see the demo page.
 
+[![Build Status](https://travis-ci.org/madebymade/jquery-navobile.png?branch=master)](https://travis-ci.org/madebymade/jquery-navobile)
+
 ###Demo
 
 [View live demo](http://madebymade.github.io/jquery-navobile)
