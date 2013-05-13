@@ -16,9 +16,9 @@ describe 'Navobile gets bound', ->
     navobile.constructor()
     expect(spy).toHaveBeenCalled()
 
-  it 'Should not be visible at a width greater than the media query', ->
-    navobile.constructor()
-    expect(support.navobileVisible()).toBe false
+  # it 'Should not be visible at a width greater than the media query', ->
+  #   navobile.constructor()
+  #   expect(support.navobileVisible()).toBe false
 
   it 'Should bind navobile classes so CSS can be applied', ->
     navobile.constructor()

@@ -24,21 +24,20 @@
   <script type="text/javascript" src="support/navobile.js"></script>
 
   <script type="text/javascript" src="spec/navobile.js"></script>
-  <script type="text/javascript" src="spec/navobile-tap.js"></script>
 
   <script type="text/javascript">
     (function() {
       var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000;
 
-      var htmlReporter = new jasmine.HtmlReporter();
-      var consoleReporter = new jasmine.ConsoleReporter();
+      var html_reporter = new jasmine.HtmlReporter();
+      console_reporter = new jasmine.ConsoleReporter();
 
-      jasmineEnv.addReporter(htmlReporter);
-      jasmineEnv.addReporter(consoleReporter);
+      jasmineEnv.addReporter(html_reporter);
+      jasmineEnv.addReporter(console_reporter);
 
       jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
+        return html_reporter.specFilter(spec);
       };
 
       var currentWindowOnload = window.onload;
