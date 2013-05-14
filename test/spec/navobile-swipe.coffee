@@ -1,4 +1,4 @@
-describe 'Open Navobile using a Swipe', ->
+describe 'Swipe Navobile', ->
   navobile = null
   support = null
   mock = null
