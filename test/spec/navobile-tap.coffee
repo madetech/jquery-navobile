@@ -11,10 +11,23 @@ describe 'Open Navobile using CTA', ->
 
   afterEach ->
     support.enableEffects()
+    support.removeNavobile()
 
-  it 'Should not open if on desktop and desktop width', ->
+  it 'Should show navigation if cta clicked on desktop', ->
+    $('html').removeClass('touch').addClass('no-touch')
     navobile.constructor()
-    support.setMobile false
     $(mock).find('#show-navobile').click()
-    expect('click').toHaveBeenPreventedOn $(mock).find('#show-navobile')
+    expect(support.navobileOpen()).toBe true
+
+  it 'Should show navigation on touchend of cta', ->
+    $('html').removeClass('no-touch').addClass('touch')
+    navobile.constructor()
+    $(mock).find('#show-navobile').trigger('touchend')
+    expect(support.navobileOpen()).toBe true
+
+  it 'Should close navigation on a second touchend of cta', ->
+    $('html').removeClass('no-touch').addClass('touch')
+    navobile.constructor()
+    $(mock).find('#show-navobile').trigger('touchend')
+    $(mock).find('#show-navobile').trigger('touchend')
     expect(support.navobileOpen()).toBe false

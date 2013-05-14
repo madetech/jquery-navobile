@@ -23,7 +23,10 @@ window.NavobileSupport = class NavobileSupport
     if $('.navobile-navigation').css('display') == 'block' then true else false
 
   navobileOpen: ->
-    if $('.navobile-content').css('left') == '0%' then false else true
+    if $('html').hasClass('csstransforms3d') or $('html').hasClass('csstransforms')
+      return if $('.navobile-content').hasClass('navobile-content-hidden') then true else false
+    else
+      return if $('.navobile-content').css('left') is '0%' then false else true
 
   enableEffects: ->
     $.fx.off = false

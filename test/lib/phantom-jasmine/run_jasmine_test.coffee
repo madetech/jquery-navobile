@@ -23,6 +23,7 @@ if phantom.args.length == 0
   phantom.exit 1
 
 page = new WebPage()
+page.viewportSize = { width: 320, height: 400 };
 
 runner = new PhantomJasmineRunner(page)
 
