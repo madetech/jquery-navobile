@@ -37,6 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.el = el;
       base.$el.data("navobile", base);
       base.attach = function() {
+        var hammerObject;
         base.$el.data({
           open: false
         });
@@ -45,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         });
         base.bindTap(base.$cta, base.$nav, base.$content, ($('html').hasClass('touch') ? 'touchend' : 'click'));
         if (typeof Hammer === 'function' && (base.options.bindSwipe || base.options.bindDrag)) {
-          base.$content.hammer();
+          hammerObject = Hammer(base.$content, base.options.hammerOptions);
           if (base.options.bindSwipe) {
             base.bindSwipe(base.$nav, base.$content);
           }
@@ -142,7 +143,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if (!$('html').hasClass('csstransforms3d') && !$('html').hasClass('csstransforms')) {
           $content.animate({
             left: percent
-          }, 200, base.options.easing);
+          }, 100, base.options.easing);
         } else {
           if (percent === '0%') {
             $content.removeClass('navobile-content-hidden');
@@ -214,7 +215,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       easing: 'linear',
       changeDOM: false,
       bindSwipe: false,
-      bindDrag: false
+      bindDrag: false,
+      hammerOptions: {}
     };
     return $.fn.navobile = function(method) {
       return this.each(function() {

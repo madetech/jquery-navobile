@@ -142,7 +142,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       if !$('html').hasClass('csstransforms3d') and !$('html').hasClass('csstransforms')
         $content.animate
             left: percent
-        , 200
+        , 100
         , base.options.easing
       else
         if percent is '0%' then $content.removeClass 'navobile-content-hidden' else $content.addClass 'navobile-content-hidden'

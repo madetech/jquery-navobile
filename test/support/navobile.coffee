@@ -26,7 +26,8 @@ window.NavobileSupport = class NavobileSupport
     if $('html').hasClass('csstransforms3d') or $('html').hasClass('csstransforms')
       return if $('.navobile-content').hasClass('navobile-content-hidden') then true else false
     else
-      return if $('.navobile-content').css('left') is '0%' then false else true
+      console.log $('.navobile-content').css('left')
+      return if parseInt($('.navobile-content').css('left')) is 0 then false else true
 
   enableEffects: ->
     $.fx.off = false
