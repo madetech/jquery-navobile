@@ -51,28 +51,12 @@
     transition: transform 0.2s linear;
   }
 
-  .csstransforms .navobile-content {
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
-  }
-
   .csstransforms #content.navobile-content-hidden {
     -webkit-transform: translateX(80%);
     -moz-transform: translateX(80%);
     -ms-transform: translateX(80%);
     -o-transform: translateX(80%);
     transform: translateX(80%);
-  }
-
-  .csstransforms3d .navobile-content {
-    -webkit-transform: translate3d(0,0,0);
-    -moz-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    -o-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
   }
 
   .csstransforms3d #content.navobile-content-hidden {

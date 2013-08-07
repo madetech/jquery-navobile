@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       )
 
       if typeof Hammer is 'function' and (base.options.bindSwipe or base.options.bindDrag)
-        base.$content.hammer()
+        hammerObject = Hammer(base.$content, base.options.hammerOptions)
 
         if base.options.bindSwipe
           base.bindSwipe base.$nav, base.$content
@@ -126,7 +126,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
           posX = e.position.x
           translateX = Math.ceil base.calculateTranslate posX
-          if translateX > 80 || translateX < 0
+          if translateX > 80 or translateX < 0
             return false
 
           if $('html').hasClass('csstransforms3d')
@@ -215,6 +215,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     changeDOM: false
     bindSwipe: false
     bindDrag: false
+    hammerOptions: {}
 
   $.fn.navobile = (method) ->
     @each ->
