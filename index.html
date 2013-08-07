@@ -170,7 +170,7 @@
             <h4>v0.2.1</h4>
             <ul>
               <li>Fixed scroll issue on Android 2.3.x - helpfully Google thought not to support overflow hidden until v3</li>
-              <li>New Version of modernisr</li>
+              <li>New Version of modernizr</li>
               <li>Ability to pass options into HammerJS</li>
             </ul>
             <h4>v0.2</h4>
@@ -235,7 +235,10 @@
           $("#navigation").navobile({
               bindSwipe: true,
               cta: "#show-navobile",
-              changeDOM: true
+              changeDOM: true,
+              hammerOptions: {
+                stop_browser_behavior: false
+              }
           });
       });
       </script>

@@ -235,13 +235,6 @@ footer {
 }
 
 @media screen and (min-width: 0px) and (max-width: 765px) {
-
-  * {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-
   .mobile-only {
     display: block;
   }
