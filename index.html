@@ -70,77 +70,109 @@
               <li><a href="http://madebymade.co.uk" data-icon="w">Visit Made</a></li>
             </ul>
           </nav>
+          <section>
+            <h3>Usage</h3>
 
-          <h3>Usage</h3>
+            <h4>JavaScript</h4>
 
-          <h4>JavaScript</h4>
+            <p>Default usage for Navobile is as easy as this:</p>
 
-          <p>Default usage for Navobile is as easy as this:</p>
+            <pre><code>$('#foobar').navobile();</code></pre>
 
-          <pre><code>$('#foobar').navobile();</code></pre>
+            <h4>CSS</h4>
 
-          <h4>CSS</h4>
+            <p>Navobile uses CSS to apply CSS3 translations, Mobile device detection and fixing the position of nav. In the CSS file we used for this demo and the one that is included in the src folder the mobile break point is at 765px using a media query, you can of course change this to suit your needs.</p>
 
-          <p>Navobile uses CSS to apply CSS3 translations, Mobile device detection and fixing the position of nav. In the CSS file we used for this demo and the one that is included in the src folder the mobile break point is at 765px using a media query, you can of course change this to suit your needs.</p>
+            <p>Changing the timing function used by the transform alter Navobile's css. The available timing functions available are listed on <a href="https://developer.mozilla.org/en-US/docs/CSS/transition-timing-function" target="_blank">MDN</a> although we don't recommend any of the step timing functions. If you want something really bespoke you could use Lea Vearou's <a href="http://cubic-bezier.com/" target="_blank">Cubic bezier</a> tool</p>
+          </section>
+          <section>
+            <h3>Options</h3>
 
-          <p>Changing the timing function used by the transform alter Navobile's css. The available timing functions available are listed on <a href="https://developer.mozilla.org/en-US/docs/CSS/transition-timing-function" target="_blank">MDN</a> although we don't recommend any of the step timing functions. If you want something really bespoke you could use Lea Vearou's <a href="http://cubic-bezier.com/" target="_blank">Cubic bezier</a> tool</p>
+            <p>Navobile has a few options to customise.</p>
 
-          <h3>Options</h3>
+            <ul>
+              <li>
+                cta - the element that will open the navigation on click (default: '#show-navigation')
+              </li>
+              <li>
+                content - the selector that wraps the content that will slide out (default: '#content')
+              </li>
+              <li>
+                easing - jQuery easing for the fallback $.animate function (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
+              </li>
+              <li>
+                changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
+              </li>
+              <li>
+                bindSwipe - Boolean, whether to open/close nav using swipe. HammerJS required for this to work. default: false
+              </li>
+              <li>
+                bindDrag - Boolean, whether to open/close nav using drag. HammerJS required for this to work. Experimental feature. default: false
+              </li>
+              <li>
+                hammerOptions - a Javascript object containing the options detailed here: <a href="https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options">https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options</a>. default: {}
+              </li>
+            </ul>
 
-          <p>Navobile has a few options to customise.</p>
+            <p>Any changes to the defaults should be passed in at init</p>
 
-          <ul>
-            <li>
-              cta - the element that will open the navigation on click (default: '#show-navigation')
-            </li>
-            <li>
-              content - the selector that wraps the content that will slide out (default: '#content')
-            </li>
-            <li>
-              easing - jQuery easing for the fallback $.animate function (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
-            </li>
-            <li>
-              changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
-            </li>
-            <li>
-              bindSwipe - Boolean, whether to open/close nav using swipe. HammerJS required for this to work. default: false
-            </li>
-            <li>
-              bindDrag - Boolean, whether to open/close nav using drag. HammerJS required for this to work. Experimental feature. default: false
-            </li>
-          </ul>
-
-          <p>Any changes to the defaults should be passed in at init</p>
-
-          <pre><code>$('#foobar').navobile({
+            <pre><code>$('#foobar').navobile({
     'cta': '#foo-cta',
     'easing': 'easeQuintOut'
 });</code></pre>
-
-          <h3>Dependencies</h3>
-          <p>
-            Navobile has a couple of dependencies to make full use of its features and get the very best performance possible.
-          </p>
-
-          <p>
-            These dependencies are:
-          </p>
-
-          <ul>
-            <li><a href="https://github.com/Modernizr/Modernizr" target="_blank">Modernizer</a></li>
-            <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS and its plugin for jQuery</a></li>
-          </ul>
-
-          <p>
-            HammerJS is only required for the swipe and experimental drag features.
-          </p>
-
-          <p>
-            The versions of the above that were used in development are included in the lib folder of the project. Version 0.2 of Navobile was built with v1.0.5 of HammerJS. Earlier versions (versions > v0.2) are recommended to use the version of <a href="https://raw.github.com/madebymade/jquery-navobile/0.1.4/lib/hammer.min.js" target="_blank" title="(Opens in new window)">HammerJS</a> in the v0.1.4 tag as it contains a bug fix.
-          </p>
+          </section>
 
           <section>
+            <h3>Dependencies</h3>
+            <p>
+              Navobile has a couple of dependencies to make full use of its features and get the very best performance possible.
+            </p>
+
+            <p>
+              These dependencies are:
+            </p>
+
+            <ul>
+              <li><a href="https://github.com/Modernizr/Modernizr" target="_blank">Modernizer</a></li>
+              <li><a href="https://github.com/eightmedia/hammer.js" target="_blank">Hammer JS and its plugin for jQuery</a></li>
+            </ul>
+
+            <p>
+              HammerJS is only required for the swipe and experimental drag features.
+            </p>
+
+            <p>
+              The versions of the above that were used in development are included in the lib folder of the project. Version 0.2 of Navobile was built with v1.0.5 of HammerJS. Earlier versions (versions > v0.2) are recommended to use the version of <a href="https://raw.github.com/madebymade/jquery-navobile/0.1.4/lib/hammer.min.js" target="_blank" title="(Opens in new window)">HammerJS</a> in the v0.1.4 tag as it contains a bug fix.
+            </p>
+
+            <p>
+              We include all of Modernizer's features and the non-core css-overflow scrolling by default. If you however have a desire to have a barebones install you need to have the following features detected to take full advantage of navobile.
+            </p>
+            <ul>
+              <li>
+                <h4>Core</h4>
+                <ul>
+                  <li>CSS 2D Transform</li>
+                  <li>CSS 3D Transform</li>
+                  <li>Touch Events</li>
+                </ul>
+              </li>
+              <li>
+                <h4>Non-Core</h4>
+                <ul>
+                  <li>css-overflow</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
             <h3>Change Log</h3>
+            <h4>v0.2.1</h4>
+            <ul>
+              <li>Fixed scroll issue on Android 2.3.x - helpfully Google thought not to support overflow hidden until v3</li>
+              <li>New Version of modernisr</li>
+              <li>Ability to pass options into HammerJS</li>
+            </ul>
             <h4>v0.2</h4>
             <ul>
               <li>Latest version of HammerJS (v1.0.5)</li>

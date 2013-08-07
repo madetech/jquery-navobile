@@ -7,11 +7,24 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 765px) {
-
     html,
     .navobile-bound {
       overflow-x: hidden;
+      overflow-y: scroll;
+      height: 100%;
       width: 100%;
+    }
+
+    .no-overflowscrolling {
+      height: auto;
+    }
+
+    .no-overflowscrolling .navobile-bound {
+      height: auto;
+    }
+
+    .overflowscrolling {
+      -webkit-overflow-scrolling: touch;
     }
 
     #navobile-device-pixel {
@@ -35,7 +48,7 @@
       width: 80%;
       z-index: -1;
     }
-    
+
     .navobile-bound .navobile-navigation {
         left: 0;
         position: fixed;
