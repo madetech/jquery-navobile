@@ -31,13 +31,14 @@
       left: -100%;
       overflow: auto;
       position: fixed;
-      top: 0;
+      top: -100%;
       width: 80%;
       z-index: 1;
     }
     
     .navobile-bound .navobile-navigation {
         left: 0;
+        top: 0;
     }
 
     .navobile-navigation ul {
