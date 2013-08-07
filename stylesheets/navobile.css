@@ -30,7 +30,7 @@
       height: 100%;
       left: -100%;
       overflow: auto;
-      position: fixed;
+      position: absolute;
       top: -100%;
       width: 80%;
       z-index: 1;
@@ -38,6 +38,7 @@
     
     .navobile-bound .navobile-navigation {
         left: 0;
+        position: fixed;
         top: 0;
     }
 
