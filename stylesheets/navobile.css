@@ -18,6 +18,11 @@
 
     .overflowscrolling {
       -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+    }
+    
+    .overflowscrolling .navobile-bound {
+      overflow: hidden;
     }
 
     #navobile-device-pixel {
