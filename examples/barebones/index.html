@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <title>jQuery Navobile by Made by Made</title>
+
+    <link rel="stylesheet" href="stylesheets/navobile.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script src="javascripts/lib/modernizer.min.js"></script>
+    <script src="javascripts/lib/jquery.navobile.min.js"></script>
+
+    <style>
+      body, html {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        margin-top: 0;
+        padding-top: 1em;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="content" style="background: #fff"> <!-- this wrapping div is required if you change its selector set the content option on init of navobile-->
+      <h1>Navobile</h1>
+      <p><strong>This page is initalised using this jQuery:</strong></p>
+      <pre id="function-call">
+$("#navigation").navobile({
+  cta: "#show-navobile",
+  changeDOM: true
+})
+      </pre>
+      <a id="show-navobile" href="#">Click to open and close Navobile</a>
+      <p>
+        The navigation below will transform in to the mobile navigation
+      </p>
+      <nav id="navigation">
+        <ul>
+          <li><a href="#">Lorem Ispum</a></li>
+          <li><a href="#">Lorem Ispum</a></li>
+          <li><a href="#">Lorem Ispum</a></li>
+          <li><a href="#">Lorem Ispum</a></li>
+        </ul>
+      </nav>
+      <p>
+        Lorem ipsum Duis Ut laboris sint do voluptate velit laboris incididunt dolore dolor ut amet commodo sed Duis in ea magna dolor voluptate sint non mollit occaecat in commodo sint sunt aliquip ea veniam magna fugiat quis dolor id.
+      </p>
+      <p>
+        Lorem ipsum Duis Ut laboris sint do voluptate velit laboris incididunt dolore dolor ut amet commodo sed Duis in ea magna dolor voluptate sint non mollit occaecat in commodo sint sunt aliquip ea veniam magna fugiat quis dolor id.
+      </p>
+      <p>
+        Lorem ipsum Duis Ut laboris sint do voluptate velit laboris incididunt dolore dolor ut amet commodo sed Duis in ea magna dolor voluptate sint non mollit occaecat in commodo sint sunt aliquip ea veniam magna fugiat quis dolor id.
+      </p>
+      <p>
+        Lorem ipsum Duis Ut laboris sint do voluptate velit laboris incididunt dolore dolor ut amet commodo sed Duis in ea magna dolor voluptate sint non mollit occaecat in commodo sint sunt aliquip ea veniam magna fugiat quis dolor id.
+      </p>
+      <p>
+        Lorem ipsum Duis Ut laboris sint do voluptate velit laboris incididunt dolore dolor ut amet commodo sed Duis in ea magna dolor voluptate sint non mollit occaecat in commodo sint sunt aliquip ea veniam magna fugiat quis dolor id.
+      </p>
+    </div>
+
+    <script>
+    console.log($('#function-call').text());
+      $(function() {
+        eval($('#function-call').text());
+      });
+    </script>
+</html>
