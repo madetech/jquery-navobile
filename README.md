@@ -24,6 +24,16 @@ There are a few parameters for the plugin, they are mostly optional.
 * changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
 * hammerOptions - a Javascript object containing the options detailed here: https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options. Only needed if you are using bindSwipe/bindDrag (default: {})
 
+###Credits
+
+Developed and maintained by [Made](http://www.madetech.co.uk?ref=github&repo=navobile).
+
+[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madetech.co.uk?ref=github&repo=navobile)
+
+Key contributions:
+
+* [Seb Ashton](https://github.com/sebashton)
+
 ###License
 
 Licensed under [New BSD License](https://github.com/madebymade/jquery-navobile/blob/master/license.txt)
