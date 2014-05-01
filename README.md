@@ -36,4 +36,4 @@ Key contributions:
 
 ###License
 
-Licensed under [New BSD License](https://github.com/madebymade/jquery-navobile/blob/master/license.txt)
+Licensed under [New BSD License](https://github.com/madebymade/jquery-navobile/blob/master/BSD-LICENSE.txt)
