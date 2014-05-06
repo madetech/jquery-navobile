@@ -139,15 +139,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     ################################################
 
     base.animateLeft = (percent, $nav, $content) ->
-      if !$('html').hasClass('csstransforms3d') and !$('html').hasClass('csstransforms')
+      if !base.canUseCssTransforms()
         $content.animate
             left: percent
         , 100
         , base.options.easing
       else
-        if percent is '0%' then $content.removeClass 'navobile-content-hidden' else $content.addClass 'navobile-content-hidden'
+        if percent is '0%'
+          $content.removeClass 'navobile-content-hidden'
+        else
+          $content.addClass 'navobile-content-hidden'
 
-      if percent is '0%' then $nav.removeClass 'navobile-navigation-visible' else $nav.addClass 'navobile-navigation-visible'
+      if percent is '0%'
+        $nav.removeClass 'navobile-navigation-visible'
+      else
+        $nav.addClass 'navobile-navigation-visible'
 
       base.removeInlineStyles $nav, $content
 
@@ -157,11 +163,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.slideContentOut = ($nav, $content) ->
       $nav.data 'open', true
-      base.animateLeft '80%', $nav, $content
+      base.animateLeft base.options.openOffsetLeft, $nav, $content
 
     ################################################
     # Helpers
     ################################################
+
+    base.canUseCssTransforms = ->
+      $('html').hasClass('csstransforms3d') or $('html').hasClass('csstransforms')
 
     base.calculateTranslate = (posX) ->
       (posX / $(document).width()) * 100
@@ -215,6 +224,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     changeDOM: false
     bindSwipe: false
     bindDrag: false
+    openOffsetLeft: '80%'
     hammerOptions: {}
 
   $.fn.navobile = (method) ->
