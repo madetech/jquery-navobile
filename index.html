@@ -67,7 +67,7 @@
               <li><a href="https://github.com/madebymade/jquery-navobile" data-icon="g">View On GitHub</a></li>
               <li><a href="https://github.com/madebymade/jquery-navobile/zipball/master" data-icon="d" target="_blank" onclick="_gaq.push(['_trackEvent', 'Download', 'Zip']);">Download Zip</a></li>
               <li><a href="https://github.com/madebymade/jquery-navobile/tarball/master" data-icon="d" target="_blank" onclick="_gaq.push(['_trackEvent', 'Download', 'Tarball']);">Download TAR</a></li>
-              <li><a href="http://madebymade.co.uk" data-icon="w">Visit Made</a></li>
+              <li><a href="http://madetech.co.uk?ref=github&repo=navobile" data-icon="w">Visit Made</a></li>
             </ul>
           </nav>
           <section>
@@ -108,6 +108,9 @@
               </li>
               <li>
                 bindDrag - Boolean, whether to open/close nav using drag. HammerJS required for this to work. Experimental feature. default: false
+              </li>
+              <li>
+                openOffetLeft - String, a percentage as a string that determines the total left offset when navobile is open. default: '80%'. N.B. Please note it you alter this you'll also want to change the width of .navobile-navigation.
               </li>
               <li>
                 hammerOptions - a Javascript object containing the options detailed here: <a href="https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options">https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options</a>. default: {}
@@ -167,6 +170,10 @@
           </section>
           <section>
             <h3>Change Log</h3>
+            <h4>v0.2.3</h4>
+            <ul>
+              <li>New Param - openOffetLeft, a percentage as a String to allow more control over the amount the navigation opens</li>
+            </ul>
             <h4>v0.2.1</h4>
             <ul>
               <li>Fixed scroll issue on Android 2.3.x - helpfully Google thought not to support overflow hidden until v3</li>
@@ -225,7 +232,7 @@
 
         <footer class="container">
           <a href="https://twitter.com/madebymade" class="twitter-follow-button" data-show-count="false">Follow @madebymade</a><br><br>
-          <address><a href="http://madebymade.co.uk" rel="author">made by Made</a></address>
+          <address><a href="http://madetech.co.uk" rel="author">made by Made</a></address>
         </footer>
 
       </div>
