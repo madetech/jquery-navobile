@@ -25,6 +25,15 @@ There are a few parameters for the plugin, they are mostly optional.
 * openOffsetLeft - String, the percentage you want navobile to open (default: '80%') N.B. If you alter this you will also need to change the width of [.navobile-navigation](https://github.com/madebymade/jquery-navobile/blob/master/src/jquery.navobile.css#L40)
 * hammerOptions - a Javascript object containing the options detailed here: https://github.com/EightMedia/hammer.js/wiki/Getting-Started#gesture-options. Only needed if you are using bindSwipe/bindDrag (default: {})
 
+###Events
+
+There are a handful of useful events fired by navobile.
+
+* open - fired when the navigation cta is tapped and navobile is hidden
+* opened - fired when the navobile is fully open
+* close - fired when the navigation cta is tapped and navobile is visible
+* closed - fired when the navobile is fully closed
+
 ###Credits
 
 Developed and maintained by [Made](http://www.madetech.co.uk?ref=github&repo=navobile).
