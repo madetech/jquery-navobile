@@ -25,7 +25,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 (function() {
   (function(window, $) {
     'use strict';
@@ -142,11 +141,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if (!base.canUseCssTransforms()) {
           $content.animate({
             left: percent
-          }, 100, base.options.easing);
+          }, 100, base.options.easing, (function(_this) {
+            return function() {
+              var eventName;
+              eventName = percent === '0%' ? 'closed' : 'opened';
+              return base.triggerEvent(eventName);
+            };
+          })(this));
         } else {
           if (percent === '0%') {
+            base.transitionEndEvents($content, 'closed');
             $content.removeClass('navobile-content-hidden');
           } else {
+            base.transitionEndEvents($content, 'opened');
             $content.addClass('navobile-content-hidden');
           }
         }
@@ -158,10 +165,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return base.removeInlineStyles($nav, $content);
       };
       base.slideContentIn = function($nav, $content) {
+        base.triggerEvent('close');
         $nav.data('open', false);
         return base.animateLeft('0%', $nav, $content);
       };
       base.slideContentOut = function($nav, $content) {
+        base.triggerEvent('open');
         $nav.data('open', true);
         return base.animateLeft(base.options.openOffsetLeft, $nav, $content);
       };
@@ -171,11 +180,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.calculateTranslate = function(posX) {
         return (posX / $(document).width()) * 100;
       };
+      base.isMobile = function() {
+        return $('#navobile-device-pixel').width() > 0;
+      };
       base.removeInlineStyles = function($nav, $content) {
         return $content.css('transform', '');
       };
-      base.isMobile = function() {
-        return $('#navobile-device-pixel').width() > 0;
+      base.triggerEvent = function(eventName) {
+        return $(document).trigger("navobile:" + eventName);
+      };
+      base.transitionEndEvents = function($content, eventName) {
+        return $content.one('webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', (function(_this) {
+          return function() {
+            return base.triggerEvent(eventName);
+          };
+        })(this));
       };
       methods = {
         init: function(options) {

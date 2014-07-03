@@ -144,10 +144,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             left: percent
         , 100
         , base.options.easing
+        , =>
+          eventName = if percent is '0%' then 'closed' else 'opened'
+          base.triggerEvent(eventName)
       else
         if percent is '0%'
+          base.transitionEndEvents $content, 'closed'
           $content.removeClass 'navobile-content-hidden'
         else
+          base.transitionEndEvents $content, 'opened'
           $content.addClass 'navobile-content-hidden'
 
       if percent is '0%'
@@ -158,10 +163,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.removeInlineStyles $nav, $content
 
     base.slideContentIn = ($nav, $content) ->
+      base.triggerEvent('close')
       $nav.data 'open', false
       base.animateLeft '0%', $nav, $content
 
     base.slideContentOut = ($nav, $content) ->
+      base.triggerEvent('open')
       $nav.data 'open', true
       base.animateLeft base.options.openOffsetLeft, $nav, $content
 
@@ -175,11 +182,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     base.calculateTranslate = (posX) ->
       (posX / $(document).width()) * 100
 
+    base.isMobile = ->
+      $('#navobile-device-pixel').width() > 0
+
     base.removeInlineStyles = ($nav, $content) ->
       $content.css 'transform', ''
 
-    base.isMobile = ->
-      $('#navobile-device-pixel').width() > 0
+    base.triggerEvent = (eventName) ->
+      $(document).trigger("navobile:#{eventName}")
+
+    base.transitionEndEvents = ($content, eventName) ->
+      $content.one 'webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd', =>
+        base.triggerEvent eventName
 
     ################################################
     # Methods
