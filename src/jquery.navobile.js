@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, Made By Made Ltd
+Copyright (c) 2014, Made By Made Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -23,7 +23,7 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 (function() {
   (function(window, $) {
@@ -205,7 +205,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           base.options = $.extend({}, $.navobile.settings, options);
           base.$cta = $(base.options.cta);
           base.$content = $(base.options.content);
-          base.$nav = base.options.changeDOM ? base.$el.clone() : base.$el;
+          base.$nav = base.options.changeDOM ? base.$el.clone(base.options.copyBoundEvents) : base.$el;
           base.$content.addClass('navobile-content');
           if ($('#navobile-device-pixel').length === 0) {
             $('body').append('<div id="navobile-device-pixel" />');
@@ -235,6 +235,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       content: '#content',
       easing: 'linear',
       changeDOM: false,
+      copyBoundEvents: false,
       bindSwipe: false,
       bindDrag: false,
       openOffsetLeft: '80%',

@@ -1,5 +1,5 @@
 ###
-Copyright (c) 2013, Made By Made Ltd
+Copyright (c) 2014, Made By Made Ltd
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -206,7 +206,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         base.options = $.extend({}, $.navobile.settings, options)
         base.$cta = $(base.options.cta)
         base.$content = $(base.options.content)
-        base.$nav = if base.options.changeDOM then base.$el.clone(true, true) else base.$el
+        base.$nav = if base.options.changeDOM then base.$el.clone(base.options.copyBoundEvents) else base.$el
         base.$content.addClass 'navobile-content'
 
         if $('#navobile-device-pixel').length is 0
@@ -236,6 +236,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     content: '#content'
     easing: 'linear'
     changeDOM: false
+    copyBoundEvents: false
     bindSwipe: false
     bindDrag: false
     openOffsetLeft: '80%'
