@@ -29,10 +29,16 @@ There are a few parameters for the plugin, they are mostly optional.
 
 There are a handful of useful events fired by navobile.
 
-* open - fired when the navigation cta is tapped and navobile is hidden
-* opened - fired when the navobile is fully open
-* close - fired when the navigation cta is tapped and navobile is visible
-* closed - fired when the navobile is fully closed
+* navobile:open - fired when the navigation cta is tapped and navobile is hidden
+* navobile:opened - fired when the navobile is fully open
+* navobile:close - fired when the navigation cta is tapped and navobile is visible
+* navobile:closed - fired when the navobile is fully closed
+
+All of these are triggered on the document, below is a jQuery example:
+
+```
+$(document).bind('navobile:open', function() {alert('navobile is opening')});
+```
 
 ###Credits
 
