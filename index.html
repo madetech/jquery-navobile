@@ -144,6 +144,12 @@
                 navobile:closed - fired when the navobile is fully closed
               </li>
             </ul>
+
+            <p>All of these are triggered on the document, below is a jQuery example:</p>
+
+            <pre><code>$(document).bind('navobile:open', function() {
+    alert('navobile is opening')
+});</code></pre>
           </section>
 
           <section>
