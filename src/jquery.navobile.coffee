@@ -206,7 +206,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         base.options = $.extend({}, $.navobile.settings, options)
         base.$cta = $(base.options.cta)
         base.$content = $(base.options.content)
-        base.$nav = if base.options.changeDOM then base.$el.clone() else base.$el
+        base.$nav = if base.options.changeDOM then base.$el.clone(true, true) else base.$el
         base.$content.addClass 'navobile-content'
 
         if $('#navobile-device-pixel').length is 0
