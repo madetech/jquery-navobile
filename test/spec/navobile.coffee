@@ -25,3 +25,7 @@ describe 'Navobile gets bound', ->
     expect($(mock).find('.navobile-navigation').length).toBeGreaterThan(0)
     expect($(mock).find('#content')).toHaveClass('navobile-content')
     expect($('body')).toHaveClass('navobile-bound')
+
+  it 'Should attach #navobile-click-catch', ->
+    navobile.constructor()
+    expect($(mock).find('#navobile-click-catch').length).toBeGreaterThan(0)

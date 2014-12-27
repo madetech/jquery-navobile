@@ -25,9 +25,9 @@ describe 'Open Navobile using CTA', ->
     $(mock).find('#show-navobile').trigger('touchend')
     expect(support.navobileOpen()).toBe true
 
-  it 'Should close navigation on a second touchend of cta', ->
+  it 'Should close navigation on a click of #navobile-click-catch', ->
     $('html').removeClass('no-touch').addClass('touch')
     navobile.constructor()
     $(mock).find('#show-navobile').trigger('touchend')
-    $(mock).find('#show-navobile').trigger('touchend')
+    $(mock).find('#navobile-click-catch').trigger('touchend')
     expect(support.navobileOpen()).toBe false

@@ -26,6 +26,6 @@ describe 'Navobile Events', ->
     navobile.constructor()
     spyEvent = spyOnEvent document, 'navobile:close'
     $(mock).find('#show-navobile').trigger('touchend')
-    $(mock).find('#show-navobile').trigger('touchend')
+    $(mock).find('#navobile-click-catch').trigger('touchend')
     expect('navobile:close').toHaveBeenTriggeredOn(document);
     expect(spyEvent).toHaveBeenTriggered();

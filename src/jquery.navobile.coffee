@@ -45,6 +45,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if $('html').hasClass 'touch' then 'touchend' else 'click'
       )
 
+      base.bindClickCatch base.$nav, base.$content, (
+        if $('html').hasClass 'touch' then 'touchend' else 'click'
+      )
+
       if typeof Hammer is 'function' and (base.options.bindSwipe or base.options.bindDrag)
         hammerObject = Hammer(base.$content, base.options.hammerOptions)
 
@@ -58,17 +62,41 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     # Touch Interactions
     ################################################
 
-    base.bindTap = ($cta, $nav, $content, type) ->
-      $cta.on type, (ev)->
-        ev.preventDefault()
-        ev.stopPropagation()
+    base.bindClickCatch = ($nav, $content, type) ->
+      $content.on 'scroll touchdrag touchmove', (e) ->
+        return if $('#navobile-click-catch').not(':visible')
+        e.preventDefault()
+        e.stopPropagation()
+
+      $content.parent().on 'scroll touchdrag touchmove', (e) ->
+        return if $('#navobile-click-catch').not(':visible')
+        e.preventDefault()
+        e.stopPropagation()
+
+      $('#navobile-click-catch').on 'scroll touchdrag touchmove', (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+
+      $('#navobile-click-catch').on type, (e) ->
+        e.preventDefault()
+        e.stopPropagation()
 
         return false if !base.isMobile()
 
-        if $nav.data('open')
-          base.slideContentIn $nav, $content
-        else
-          base.slideContentOut $nav, $content
+        base.slideContentIn $nav, $content
+
+        return false
+
+    base.bindTap = ($cta, $nav, $content, type) ->
+      $cta.on type, (e)->
+        e.preventDefault()
+        e.stopPropagation()
+
+        $content.scrollTop(0)
+
+        return false if !base.isMobile()
+
+        base.slideContentOut $nav, $content
 
         return false
 
@@ -183,6 +211,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     # Helpers
     ################################################
 
+    base.clickCatchHtml = ->
+      """
+      <div id="navobile-click-catch"></div>
+      """
+
     base.showOnRight = ->
       base.options.direction is 'rtl'
 
@@ -219,6 +252,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         base.$nav = if base.options.changeDOM then base.$el.clone(base.options.copyBoundEvents) else base.$el
 
         base.$content.addClass "navobile-content navobile-content--#{base.options.direction}"
+
+        base.$content.prepend(base.clickCatchHtml)
 
         if $('#navobile-device-pixel').length is 0
           $('body').append '<div id="navobile-device-pixel" />'
