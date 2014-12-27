@@ -29,7 +29,6 @@
     <link href='//fonts.googleapis.com/css?family=Lato:300,400,700|Ubuntu:500,700' rel='stylesheet' type='text/css'>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="javascripts/address_bump.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -96,6 +95,9 @@
               </li>
               <li>
                 content - the selector that wraps the content that will slide out (default: '#content')
+              </li>
+              <li>
+                direction - the direction and therefore side that the content slides, is either 'rtl' or 'ltr' (default: 'ltr')
               </li>
               <li>
                 easing - jQuery easing for the fallback $.animate function (default: 'linear') for more easing options you will require <a href="http://gsgd.co.uk/sandbox/jquery/easing/">jQuery.easing</a>
@@ -200,6 +202,10 @@
           </section>
           <section>
             <h3>Change Log</h3>
+            <h4>v0.3.0</h4>
+            <ul>
+              <li>New Option - direction, a string variable. Which direction to slide the content</li>
+            </ul>
             <h4>v0.2.6</h4>
             <ul>
               <li>New Param - copyBoundEvents, a boolean variable. Whether or not to copy DOM events</li>

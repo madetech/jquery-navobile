@@ -18,7 +18,7 @@
     .overflowscrolling {
       -webkit-overflow-scrolling: touch;
     }
-    
+
     #navobile-device-pixel {
       width: 1px;
     }
@@ -39,7 +39,7 @@
       top: -100%;
       width: 80%;
       z-index: -1;
-      
+
       -webkit-transform: translateX(0);
       -moz-transform: translateX(0);
       -ms-transform: translateX(0);
@@ -47,11 +47,21 @@
       transform: translateX(0);
     }
 
+    .navobile-navigation--rtl {
+      left: auto;
+      right: -100%;
+    }
+
     .navobile-bound .navobile-navigation {
-        left: 0;
-        position: fixed;
-        top: 0;
-        z-index: 1;
+      left: 0;
+      position: fixed;
+      top: 0;
+      z-index: 1;
+    }
+
+    .navobile-bound .navobile-navigation--rtl {
+      left: auto;
+      right: 0;
     }
 
     .navobile-navigation ul {
