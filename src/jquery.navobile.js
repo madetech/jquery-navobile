@@ -69,7 +69,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         });
       };
       base.bindSwipe = function($nav, $content) {
-        $content.on('swipeleft', function(e) {
+        var in_gesture, out_gesture;
+        in_gesture = base.showOnRight ? 'right' : 'left';
+        out_gesture = base.showOnRight ? 'left' : 'right';
+        $content.on("swipe" + in_gesture, function(e) {
           if (!base.isMobile()) {
             return false;
           }
@@ -81,7 +84,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           e.gesture.preventDefault();
           return e.stopPropagation();
         });
-        return $content.on('swiperight', function(e) {
+        return $content.on("swipe" + out_gesture, function(e) {
           if (!base.isMobile()) {
             return false;
           }
@@ -95,6 +98,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         });
       };
       base.bindDrag = function($nav, $content) {
+        var in_gesture, out_gesture;
+        in_gesture = base.showOnRight ? 'right' : 'left';
+        out_gesture = base.showOnRight ? 'left' : 'right';
         return $content.on('dragstart drag dragend release', function(e) {
           var posX, translateX;
           if (!base.isMobile()) {
@@ -104,14 +110,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             base.removeInlineStyles($nav, $content);
             return false;
           }
-          if (e.direction === 'left') {
+          if (e.direction === in_gesture) {
             if (!$content.hasClass('navobile-content-hidden')) {
               return false;
             } else {
               base.slideContentIn($nav, $content);
             }
           }
-          if (e.direction === 'right') {
+          if (e.direction === out_gesture) {
             if (e.type === 'dragend') {
               if (e.distance > 60) {
                 base.slideContentOut($nav, $content);
@@ -137,11 +143,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           }
         });
       };
-      base.animateLeft = function(percent, $nav, $content) {
+      base.animateContent = function(percent, $nav, $content) {
+        var dir_anime;
         if (!base.canUseCssTransforms()) {
-          $content.animate({
+          dir_anime = base.showOnRight ? {
+            right: percent
+          } : {
             left: percent
-          }, 100, base.options.easing, (function(_this) {
+          };
+          $content.animate(dir_anime, 100, base.options.easing, (function(_this) {
             return function() {
               var eventName;
               eventName = percent === '0%' ? 'closed' : 'opened';
@@ -167,12 +177,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.slideContentIn = function($nav, $content) {
         base.triggerEvent('close');
         $nav.data('open', false);
-        return base.animateLeft('0%', $nav, $content);
+        return base.animateContent('0%', $nav, $content);
       };
       base.slideContentOut = function($nav, $content) {
         base.triggerEvent('open');
         $nav.data('open', true);
-        return base.animateLeft(base.options.openOffsetLeft, $nav, $content);
+        return base.animateContent(base.options.openOffset, $nav, $content);
+      };
+      base.showOnRight = function() {
+        return base.options.direction === 'rtl';
       };
       base.canUseCssTransforms = function() {
         return $('html').hasClass('csstransforms3d') || $('html').hasClass('csstransforms');
@@ -206,7 +219,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           base.$cta = $(base.options.cta);
           base.$content = $(base.options.content);
           base.$nav = base.options.changeDOM ? base.$el.clone(base.options.copyBoundEvents) : base.$el;
-          base.$content.addClass('navobile-content');
+          base.$content.addClass("navobile-content navobile-content--" + base.options.direction);
           if ($('#navobile-device-pixel').length === 0) {
             $('body').append('<div id="navobile-device-pixel" />');
           }
@@ -218,7 +231,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             base.$nav.attr('id', "navobile-" + originalId);
             base.$content.before(base.$nav);
           }
-          base.$nav.addClass('navobile-navigation');
+          base.$nav.addClass("navobile-navigation navobile-navigation--" + base.options.direction);
           return base.attach();
         }
       };
@@ -233,12 +246,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     $.navobile.settings = {
       cta: '#show-navigation',
       content: '#content',
+      direction: 'ltr',
       easing: 'linear',
       changeDOM: false,
       copyBoundEvents: false,
       bindSwipe: false,
       bindDrag: false,
-      openOffsetLeft: '80%',
+      openOffset: '80%',
       hammerOptions: {}
     };
     return $.fn.navobile = function(method) {

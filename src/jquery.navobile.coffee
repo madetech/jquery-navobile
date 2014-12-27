@@ -73,7 +73,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return false
 
     base.bindSwipe = ($nav, $content) ->
-      $content.on 'swipeleft', (e) ->
+      in_gesture = if base.showOnRight then 'right' else 'left'
+      out_gesture = if base.showOnRight then 'left' else 'right'
+
+      $content.on "swipe#{in_gesture}", (e) ->
         return false if !base.isMobile()
 
         if $content.data('drag')
@@ -84,7 +87,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         e.gesture.preventDefault()
         e.stopPropagation()
 
-      $content.on 'swiperight', (e) ->
+      $content.on "swipe#{out_gesture}", (e) ->
         return false if !base.isMobile()
 
         if $content.data('drag')
@@ -96,6 +99,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         e.stopPropagation()
 
     base.bindDrag = ($nav, $content) ->
+      in_gesture = if base.showOnRight then 'right' else 'left'
+      out_gesture = if base.showOnRight then 'left' else 'right'
+
       $content.on 'dragstart drag dragend release', (e) ->
         return false if !base.isMobile()
 
@@ -103,13 +109,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           base.removeInlineStyles $nav, $content
           return false
 
-        if e.direction is 'left'
+        if e.direction is in_gesture
           if !$content.hasClass('navobile-content-hidden')
             return false
           else
             base.slideContentIn $nav, $content
 
-        if e.direction is 'right'
+        if e.direction is out_gesture
           if e.type is 'dragend'
 
             if e.distance > 60
@@ -138,10 +144,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     # Element Movement
     ################################################
 
-    base.animateLeft = (percent, $nav, $content) ->
+    base.animateContent = (percent, $nav, $content) ->
       if !base.canUseCssTransforms()
-        $content.animate
-            left: percent
+        dir_anime = if base.showOnRight then right: percent else left: percent
+
+        $content.animate dir_anime
         , 100
         , base.options.easing
         , =>
@@ -165,16 +172,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     base.slideContentIn = ($nav, $content) ->
       base.triggerEvent('close')
       $nav.data 'open', false
-      base.animateLeft '0%', $nav, $content
+      base.animateContent '0%', $nav, $content
 
     base.slideContentOut = ($nav, $content) ->
       base.triggerEvent('open')
       $nav.data 'open', true
-      base.animateLeft base.options.openOffsetLeft, $nav, $content
+      base.animateContent base.options.openOffset, $nav, $content
 
     ################################################
     # Helpers
     ################################################
+
+    base.showOnRight = ->
+      base.options.direction is 'rtl'
 
     base.canUseCssTransforms = ->
       $('html').hasClass('csstransforms3d') or $('html').hasClass('csstransforms')
@@ -207,7 +217,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         base.$cta = $(base.options.cta)
         base.$content = $(base.options.content)
         base.$nav = if base.options.changeDOM then base.$el.clone(base.options.copyBoundEvents) else base.$el
-        base.$content.addClass 'navobile-content'
+
+        base.$content.addClass "navobile-content navobile-content--#{base.options.direction}"
 
         if $('#navobile-device-pixel').length is 0
           $('body').append '<div id="navobile-device-pixel" />'
@@ -221,7 +232,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           base.$nav.attr 'id', "navobile-#{ originalId }"
           base.$content.before base.$nav
 
-        base.$nav.addClass 'navobile-navigation'
+        base.$nav.addClass "navobile-navigation navobile-navigation--#{base.options.direction}"
         base.attach()
 
     if methods[method]
@@ -234,12 +245,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   $.navobile.settings =
     cta: '#show-navigation'
     content: '#content'
+    direction: 'ltr'
     easing: 'linear'
     changeDOM: false
     copyBoundEvents: false
     bindSwipe: false
     bindDrag: false
-    openOffsetLeft: '80%'
+    openOffset: '80%'
     hammerOptions: {}
 
   $.fn.navobile = (method) ->
