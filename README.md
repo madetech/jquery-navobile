@@ -20,7 +20,8 @@ There are a few parameters for the plugin, they are mostly optional.
 
 * cta - the element that will open the navigation on click (default: '#show-navigation')
 * content - the selector that wraps the content that will slide out (default: '#content')
-* direction - the direction and therefore side that the content slides (default: 'ltr')
+* clickCatch - Boolean, if to close navobile of any of the off screen content is touched (default: true)
+* direction - String, either 'ltr' or 'rtl'. The direction and therefore side that the content slides (default: 'ltr')
 * easing - jQuery easing function to use in $.animate fallback (default: 'linear') for more easing options you will require [jQuery.easing](http://gsgd.co.uk/sandbox/jquery/easing/)
 * changeDOM - Boolean, whether the plugin needs to move the navigation in the DOM structure (default: false)
 * copyBoundEvents - Boolean, if changeDOM is true, whether to or not to copy across any bound events (default: false)
