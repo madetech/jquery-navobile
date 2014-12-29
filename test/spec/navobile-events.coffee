@@ -1,4 +1,4 @@
-describe 'Navobile Events', ->
+describe 'Events', ->
   navobile = null
   support = null
   mock = null

@@ -1,4 +1,4 @@
-describe 'Swipe Navobile', ->
+describe '#bindSwipe', ->
   navobile = null
   support = null
   mock = null
@@ -13,7 +13,7 @@ describe 'Swipe Navobile', ->
     support.enableEffects()
     support.removeNavobile()
 
-  it 'Should not be swiped if HammerJS not loaded', ->
+  it 'should not be active if HammerJS not loaded', ->
     $('html').removeClass('no-touch').addClass('touch')
     window.Hammer = null
     navobile.constructor()
