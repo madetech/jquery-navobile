@@ -14,13 +14,13 @@
     "author": {
       "name": "Made by Made",
       "email": "studio@madebymade.co.uk",
-      "url": "https://github.com/madebymade/jquery-navobile/blob/master/AUTHORS.txt"
+      "url": "https://github.com/madetech/jquery-navobile/blob/master/AUTHORS.txt"
     },
     "maintainers": [
     {
       "name": "Seb Ashton",
       "email": "seb+navobile@madebymade.co.uk",
-      "url": "http://www.madebymade.co.uk"
+      "url": "http://www.madetech.com"
     }
   ],
     "licenses": [
@@ -29,10 +29,10 @@
       "url": "https://github.com/madebymade/jquery-navobile/blob/master/BSD-LICENSE.txt"
     }
   ],
-    "bugs": "https://github.com/madebymade/jquery-navobile/issues",
-    "homepage": "http://madebymade.github.io/jquery-navobile/",
-    "docs": "http://madebymade.github.io/jquery-navobile/",
-    "download": "https://github.com/madebymade/jquery-navobile/zipball/master",
+    "bugs": "https://github.com/madetech/jquery-navobile/issues",
+    "homepage": "http://madetech.github.io/jquery-navobile/",
+    "docs": "https://madetech.github.io/jquery-navobile/",
+    "download": "https://github.com/madetech/jquery-navobile/zipball/master",
     "dependencies": {
       "jquery": ">=1.8 <=2.0",
       "hammer": "1.0.5",
