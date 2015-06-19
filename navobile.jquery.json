@@ -10,23 +10,23 @@
       "touch",
       "off canvas"
     ],
-    "version": "0.3.1",
+    "version": "0.3.2",
     "author": {
-      "name": "Made by Made",
-      "email": "studio@madebymade.co.uk",
+      "name": "Made Tech",
+      "email": "hello@madetech.com",
       "url": "https://github.com/madetech/jquery-navobile/blob/master/AUTHORS.txt"
     },
     "maintainers": [
     {
       "name": "Seb Ashton",
-      "email": "seb+navobile@madebymade.co.uk",
+      "email": "seb+navobile@madetech.co.uk",
       "url": "http://www.madetech.com"
     }
   ],
     "licenses": [
     {
       "type": "New BSD",
-      "url": "https://github.com/madebymade/jquery-navobile/blob/master/BSD-LICENSE.txt"
+      "url": "https://github.com/madetech/jquery-navobile/blob/master/BSD-LICENSE.txt"
     }
   ],
     "bugs": "https://github.com/madetech/jquery-navobile/issues",
