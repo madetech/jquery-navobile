@@ -2,17 +2,17 @@
 
 For full documentation please see the demo page.
 
-[![Build Status](https://travis-ci.org/madebymade/jquery-navobile.png?branch=master)](https://travis-ci.org/madebymade/jquery-navobile)
+[![Build Status](https://travis-ci.org/madetech/jquery-navobile.png?branch=master)](https://travis-ci.org/madetech/jquery-navobile)
 
 ###Demo
 
-[View live demo](http://madebymade.github.io/jquery-navobile)
+[View live demo](http://madetech.github.io/jquery-navobile)
 
 ###Usage
 
 `$('#foobar').navobile();`
 
-The css required for the plugin is [here](https://raw.github.com/madebymade/jquery-navobile/master/src/jquery.navobile.css) because its always better to control styling in CSS where possible.
+The css required for the plugin is [here](https://raw.github.com/madetech/jquery-navobile/master/src/jquery.navobile.css) because its always better to control styling in CSS where possible.
 
 ###Params
 
@@ -44,9 +44,9 @@ $(document).bind('navobile:open', function() {alert('navobile is opening')});
 
 ###Credits
 
-Developed and maintained by [Made](http://www.madetech.co.uk?ref=github&repo=navobile).
+Developed and maintained by [Made](http://www.madetech.com?ref=github&repo=navobile).
 
-[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madetech.co.uk?ref=github&repo=navobile)
+[![made](https://s3-eu-west-1.amazonaws.com/made-assets/googleapps/google-apps.png)](http://www.madetech.com?ref=github&repo=navobile)
 
 Key contributions:
 
@@ -54,4 +54,4 @@ Key contributions:
 
 ###License
 
-Licensed under [New BSD License](https://github.com/madebymade/jquery-navobile/blob/master/BSD-LICENSE.txt)
+Licensed under [New BSD License](https://github.com/madetech/jquery-navobile/blob/master/BSD-LICENSE.txt)
