@@ -73,8 +73,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return false
 
     base.bindSwipe = ($nav, $content) ->
-      in_gesture = if base.showOnRight then 'right' else 'left'
-      out_gesture = if base.showOnRight then 'left' else 'right'
+      in_gesture = if base.showOnRight() then 'right' else 'left'
+      out_gesture = if base.showOnRight() then 'left' else 'right'
 
       $content.on "swipe#{in_gesture}", (e) ->
         return false if !base.isMobile()
