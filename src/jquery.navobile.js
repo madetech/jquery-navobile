@@ -70,8 +70,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       };
       base.bindSwipe = function($nav, $content) {
         var in_gesture, out_gesture;
-        in_gesture = base.showOnRight ? 'right' : 'left';
-        out_gesture = base.showOnRight ? 'left' : 'right';
+        in_gesture = base.showOnRight() ? 'right' : 'left';
+        out_gesture = base.showOnRight() ? 'left' : 'right';
         $content.on("swipe" + in_gesture, function(e) {
           if (!base.isMobile()) {
             return false;
@@ -99,8 +99,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       };
       base.bindDrag = function($nav, $content) {
         var in_gesture, out_gesture;
-        in_gesture = base.showOnRight ? 'right' : 'left';
-        out_gesture = base.showOnRight ? 'left' : 'right';
+        in_gesture = base.showOnRight() ? 'right' : 'left';
+        out_gesture = base.showOnRight() ? 'left' : 'right';
         return $content.on('dragstart drag dragend release', function(e) {
           var posX, translateX;
           if (!base.isMobile()) {
@@ -146,7 +146,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.animateContent = function(percent, $nav, $content) {
         var dir_anime;
         if (!base.canUseCssTransforms()) {
-          dir_anime = base.showOnRight ? {
+          dir_anime = base.showOnRight() ? {
             right: percent
           } : {
             left: percent
