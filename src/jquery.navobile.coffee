@@ -73,8 +73,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         return false
 
     base.bindSwipe = ($nav, $content) ->
-      in_gesture = if base.showOnRight then 'right' else 'left'
-      out_gesture = if base.showOnRight then 'left' else 'right'
+      in_gesture = if base.showOnRight() then 'right' else 'left'
+      out_gesture = if base.showOnRight() then 'left' else 'right'
 
       $content.on "swipe#{in_gesture}", (e) ->
         return false if !base.isMobile()
@@ -99,8 +99,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         e.stopPropagation()
 
     base.bindDrag = ($nav, $content) ->
-      in_gesture = if base.showOnRight then 'right' else 'left'
-      out_gesture = if base.showOnRight then 'left' else 'right'
+      in_gesture = if base.showOnRight() then 'right' else 'left'
+      out_gesture = if base.showOnRight() then 'left' else 'right'
 
       $content.on 'dragstart drag dragend release', (e) ->
         return false if !base.isMobile()
@@ -146,7 +146,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     base.animateContent = (percent, $nav, $content) ->
       if !base.canUseCssTransforms()
-        dir_anime = if base.showOnRight then right: percent else left: percent
+        dir_anime = if base.showOnRight() then right: percent else left: percent
 
         $content.animate dir_anime
         , 100
