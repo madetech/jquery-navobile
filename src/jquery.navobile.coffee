@@ -41,9 +41,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       base.$content.data
         drag: false
 
-      base.bindTap base.$cta, base.$nav, base.$content, (
-        if $('html').hasClass 'touch' then 'touchend' else 'click'
-      )
+      base.bindTap base.$cta, base.$nav, base.$content, 'click'
+      
+      if $('html').hasClass 'touch'
+        base.bindTap base.$cta, base.$nav, base.$content, 'touchend'
 
       if typeof Hammer is 'function' and (base.options.bindSwipe or base.options.bindDrag)
         hammerObject = Hammer(base.$content, base.options.hammerOptions)

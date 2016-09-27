@@ -42,7 +42,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         base.$content.data({
           drag: false
         });
-        base.bindTap(base.$cta, base.$nav, base.$content, ($('html').hasClass('touch') ? 'touchend' : 'click'));
+        base.bindTap(base.$cta, base.$nav, base.$content, 'click');
+        if ($('html').hasClass('touch')) {
+          base.bindTap(base.$cta, base.$nav, base.$content, 'touchend');
+        }
         if (typeof Hammer === 'function' && (base.options.bindSwipe || base.options.bindDrag)) {
           hammerObject = Hammer(base.$content, base.options.hammerOptions);
           if (base.options.bindSwipe) {
